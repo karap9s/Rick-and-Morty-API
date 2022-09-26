@@ -1,0 +1,22 @@
+.wrapper {
+  background-color: #EDEDED;
+}
+
+.search_wrapper {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  width: 400px;
+  height: 40px;
+  border: 3px solid #783FE8;
+  border-radius: 100px;
+}
+
+.search::placeholder {
+  font-size: 22px;
+  color: #009176;
+}
