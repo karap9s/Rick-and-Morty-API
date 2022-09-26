@@ -1,11 +1,8 @@
 import React from 'react';
+import styles from './about.module.css';
 
 const About: React.FC = () => {
-  return (
-    <div className="wrapper">
-      <h3 className="message">Page Not Found</h3>
-    </div>
-  );
+  return <div className={styles.wrapper}></div>;
 };
 
 export default About;

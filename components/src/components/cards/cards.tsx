@@ -1,11 +1,8 @@
 import React from 'react';
+import styles from './cards.module.css';
 
 const Cards: React.FC = () => {
-  return (
-    <div className="wrapper">
-      <h3 className="message">Page Not Found</h3>
-    </div>
-  );
+  return <div className={styles.wrapper}></div>;
 };
 
 export default Cards;
