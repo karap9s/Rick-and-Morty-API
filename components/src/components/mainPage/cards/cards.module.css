@@ -1,0 +1,37 @@
+.wrapper {
+  background-color: #EDEDED;
+}
+
+.cards_wrapper {
+  margin: 0 40px 0 40px;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #A5F279;
+}
+
+.card {
+  background-color: #EBEC67;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid blue;
+}
+
+.more {
+  width: 200px;
+  height: 50px;
+  border: 2px solid #783FE8;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  background-color: #783FE8;
+  color: #A5F279;
+  font-size: 22px;
+}
+
+.more:hover {
+  cursor: pointer;
+  background-color: purple;
+  transition: .7s;
+}
