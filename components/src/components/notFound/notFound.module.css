@@ -1,5 +1,7 @@
 .wrapper {
-  background-color: #EDEDED;
+  background: url(../../assets/img/rick-and-morty-nawpic-3.jpg);
+  background-position-x: center;
+  background-size: contain;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -8,4 +10,5 @@
 
 .message {
   font-size: 48px;
+  color: #fff;
 }

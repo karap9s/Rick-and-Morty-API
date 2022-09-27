@@ -6,7 +6,11 @@ const Cards: React.FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.cards_wrapper}>
         <div className={styles.card}>
-          <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick" />
+          <img
+            className={styles.image}
+            src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+            alt="Rick"
+          />
           <h1 className={styles.name}>Rick Sanchez</h1>
           <h3 className={styles.species}>Species: Human</h3>
           <h3 className={styles.gender}>Gender: Male</h3>
