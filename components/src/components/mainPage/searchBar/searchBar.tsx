@@ -2,7 +2,7 @@ import React, { Component, FormEvent } from 'react';
 import styles from './searchBar.module.css';
 
 const SearchBar: React.FC = () => {
-  class Search extends Component {
+  class Search extends Component<unknown, { value: string }> {
     constructor(props: string) {
       super(props);
 
@@ -11,13 +11,16 @@ const SearchBar: React.FC = () => {
       };
     }
 
-    handlerInput(event: FormEvent<HTMLInputElement>) {
-      localStorage.setItem('search', JSON.stringify(event.currentTarget.value));
+    handlerInput = (event: FormEvent<HTMLInputElement>) => {
+      this.setState({ value: event.currentTarget.value });
+    };
+
+    UNSAFE_componentWillMount(): void {
+      this.setState({ value: JSON.parse(localStorage.getItem('search') || '') });
     }
 
     componentWillUnmount(): void {
-      this.handlerInput;
-      console.log(JSON.parse(localStorage.getItem('search') || ''));
+      localStorage.setItem('search', JSON.stringify(this.state.value));
     }
 
     render() {
@@ -28,7 +31,7 @@ const SearchBar: React.FC = () => {
             type="text"
             placeholder="Search..."
             onChange={this.handlerInput}
-            defaultValue={JSON.parse(localStorage.getItem('search') || '')}
+            value={this.state.value}
           />
         </>
       );
