@@ -1,9 +1,13 @@
 import React from 'react';
+import Search from '../searchBar/searchBar';
 import styles from './cards.module.css';
 
 const Cards: React.FC = () => {
   return (
     <div className={styles.wrapper}>
+      <div className={styles.search_wrapper}>
+        <Search />
+      </div>
       <div className={styles.cards_wrapper}>
         <div className={styles.card}>
           <img

@@ -6,7 +6,6 @@ import SearchBar from './searchBar/searchBar';
 const MainPage: React.FC = () => {
   return (
     <>
-      <SearchBar />
       <Cards />
     </>
   );

@@ -1,5 +1,6 @@
 .wrapper {
-  background-color: #EDEDED;
+  background: url(../../../assets/img/87907-rick-and-morty-cartoons-tv-shows-hd-rick-morty.jpg);
+  background-size: contain;
 }
 
 .cards_wrapper {
@@ -8,11 +9,6 @@
   gap: 50px;
   flex-wrap: wrap;
   justify-content: center;
-  background: url(../../../assets/img/87907-rick-and-morty-cartoons-tv-shows-hd-rick-morty.jpg);
-  background-position-y: -128px;
-  /* background-repeat: no-repeat; */
-  background-size: contain;
-  background-color: #A5F279;
 }
 
 .card {
@@ -38,4 +34,35 @@
   cursor: pointer;
   background-color: purple;
   transition: .7s;
+}
+
+.search_wrapper {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  background-image: url('../../../assets/icons/1200px-Magnifying_glass_icon.png');
+  background-repeat: no-repeat;
+  background-position-x: 20px;
+  background-position-y: center;
+  background-size: 30px;
+  width: 400px;
+  height: 40px;
+  border: 3px solid #783FE8;
+  border-radius: 100px;
+  align-items: center;
+}
+
+.search::placeholder {
+  font-size: 22px;
+  color: #009176;
+  padding-left: 60px;
+}
+
+.test {
+  color: red;
+  font-size: 34px;
 }

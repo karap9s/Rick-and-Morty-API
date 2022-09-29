@@ -2,10 +2,12 @@
   display: flex;
   justify-content: space-around;
   border-bottom: 2px solid black;
+  background: url(../../assets/img/9786ec883756c755df35a331ff902f3b.png);
+  padding: 20px 0;
 }
 
 .link {
-  color: black;
+  color: white;
   text-decoration: none;
   transition: .5s;
   font-size: 24px;
