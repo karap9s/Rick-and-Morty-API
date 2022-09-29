@@ -1,5 +1,6 @@
 import React, { Component, FormEvent } from 'react';
 import styles from './searchBar.module.css';
+import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
 
 class Search extends Component<unknown, { value: string }> {
   constructor(props: string) {
@@ -25,13 +26,18 @@ class Search extends Component<unknown, { value: string }> {
   render() {
     return (
       <>
-        <input
-          className={styles.search}
-          type="text"
-          placeholder="Search..."
-          onChange={this.handlerInput}
-          value={this.state.value}
-        />
+        <div className={styles.search_form}>
+          <input
+            className={styles.search}
+            type="text"
+            placeholder="Search..."
+            onChange={this.handlerInput}
+            value={this.state.value}
+          />
+          <button className={styles.search_btn}>
+            <img src={Pic} alt="button" width={30} />
+          </button>
+        </div>
       </>
     );
   }
