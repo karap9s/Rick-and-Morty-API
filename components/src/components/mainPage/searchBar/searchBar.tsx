@@ -19,8 +19,17 @@ class Search extends Component<unknown, { value: string }> {
     this.setState({ value: JSON.parse(localStorage.getItem('search') || '') });
   }
 
+  componentDidMount(): void {
+    window.addEventListener('onload', () => {
+      this.setState({ value: JSON.parse(localStorage.getItem('search') || '') });
+    });
+  }
+
   componentWillUnmount(): void {
     localStorage.setItem('search', JSON.stringify(this.state.value));
+    window.addEventListener('unload', () => {
+      localStorage.setItem('search', JSON.stringify(this.state.value));
+    });
   }
 
   render() {
