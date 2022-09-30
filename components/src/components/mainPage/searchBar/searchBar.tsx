@@ -16,7 +16,7 @@ class Search extends Component<unknown, { value: string }> {
   };
 
   UNSAFE_componentWillMount(): void {
-    this.setState({ value: JSON.parse(localStorage.getItem('search') || '') });
+    this.setState({ value: JSON.parse(localStorage.getItem('search') || JSON.stringify('')) });
   }
 
   componentDidMount(): void {
