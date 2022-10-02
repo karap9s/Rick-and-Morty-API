@@ -7,30 +7,27 @@ class Search extends Component<unknown, { value: string }> {
     super(props);
 
     this.state = {
-      value: '',
+      value: localStorage.getItem('search') || '',
     };
+
+    this.handlerBeforeUnload = this.handlerBeforeUnload.bind(this);
   }
 
   handlerInput = (event: FormEvent<HTMLInputElement>) => {
     this.setState({ value: event.currentTarget.value });
   };
 
-  UNSAFE_componentWillMount(): void {
-    this.setState({ value: JSON.parse(localStorage.getItem('search') || JSON.stringify('')) });
-    console.log(this.state.value);
+  handlerBeforeUnload() {
+    localStorage.setItem('search', this.state.value);
+    window.removeEventListener('beforeunload', this.handlerBeforeUnload);
   }
 
   componentDidMount(): void {
-    window.addEventListener('onload', () => {
-      this.setState({ value: JSON.parse(localStorage.getItem('search') || JSON.stringify('')) });
-    });
+    window.addEventListener('beforeunload', this.handlerBeforeUnload);
   }
 
   componentWillUnmount(): void {
-    localStorage.setItem('search', JSON.stringify(this.state.value));
-    window.addEventListener('unload', () => {
-      localStorage.setItem('search', JSON.stringify(this.state.value));
-    });
+    this.handlerBeforeUnload();
   }
 
   render() {
