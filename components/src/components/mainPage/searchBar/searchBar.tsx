@@ -2,8 +2,8 @@ import React, { Component, FormEvent } from 'react';
 import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
 
-class Search extends Component<unknown, { value: string }> {
-  constructor(props: unknown) {
+class Search extends Component<Record<string, never>, { value: string }> {
+  constructor(props: Record<string, never>) {
     super(props);
 
     this.state = {
