@@ -2,12 +2,30 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Search from 'components/mainPage/searchBar/searchBar';
 import setLocalStorage from './localStorageMock';
+import About from 'components/about/about';
+import NotFound from 'components/notFound/notFound';
 
 describe('Main', () => {
   it('Search placeholder', () => {
     render(<Search />);
     screen.debug();
     expect(screen.getByPlaceholderText(/Search.../i)).toBeInTheDocument();
+  });
+});
+
+describe('About', () => {
+  it("Search author's name", () => {
+    render(<About />);
+    screen.debug();
+    expect(screen.getByText(/Daniil Sharenkov/i)).toBeInTheDocument();
+  });
+});
+
+describe('Not Found', () => {
+  it('Search Heading', () => {
+    render(<NotFound />);
+    screen.debug();
+    expect(screen.getByText(/Page Not Found/i)).toBeInTheDocument();
   });
 });
 
