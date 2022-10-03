@@ -3,7 +3,7 @@ import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
 
 class Search extends Component<unknown, { value: string }> {
-  constructor(props: string) {
+  constructor(props: unknown) {
     super(props);
 
     this.state = {
@@ -13,11 +13,11 @@ class Search extends Component<unknown, { value: string }> {
     this.handlerBeforeUnload = this.handlerBeforeUnload.bind(this);
   }
 
-  handlerInput = (event: FormEvent<HTMLInputElement>) => {
+  handlerInput = (event: FormEvent<HTMLInputElement>): void => {
     this.setState({ value: event.currentTarget.value });
   };
 
-  handlerBeforeUnload() {
+  handlerBeforeUnload(): void {
     localStorage.setItem('search', this.state.value);
     window.removeEventListener('beforeunload', this.handlerBeforeUnload);
   }
