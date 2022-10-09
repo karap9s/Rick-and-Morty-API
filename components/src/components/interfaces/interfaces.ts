@@ -1,4 +1,4 @@
-interface ICards {
+export interface ICards {
   id: number;
   name: string;
   status: string;
@@ -19,4 +19,20 @@ interface ICards {
   creater: string;
 }
 
-export default ICards;
+export interface IFormCards {
+  name: string;
+  surname: string;
+  birthDate: string;
+  avatar: string;
+  country: string;
+  accept?: boolean;
+
+  nameError?: boolean;
+  surnameError?: boolean;
+  birthDateError?: boolean;
+  avatarError?: boolean;
+  countryError?: boolean;
+  acceptError?: boolean;
+
+  disabled?: boolean;
+}

@@ -1,34 +1,13 @@
-import React, { Component } from 'react';
+import { IFormCards } from 'components/interfaces/interfaces';
+import React, { ChangeEvent, Component } from 'react';
 import List from './countryList';
 import styles from './form.module.css';
-// import {
-//   nameHandler,
-//   surnameHandler,
-//   birthDateHandler,
-//   countryHandler,
-//   acceptHandler,
-//   submitHandler,
-//   state,
-// } from './validation';
+import FormCards from './formCards';
 
-class Form extends Component<
-  Record<string, never>,
-  {
-    name: string;
-    surname: string;
-    birthDate: string;
-    avatar: string;
-    country: string;
-    accept: boolean;
+class Form extends Component<Record<string, never>, IFormCards> {
+  storage: IFormCards[];
+  i: number;
 
-    nameError: boolean;
-    surnameError: boolean;
-    birthDateError: boolean;
-    avatarError: boolean;
-    countryError: boolean;
-    acceptError: boolean;
-  }
-> {
   constructor(props: Record<string, never>) {
     super(props);
 
@@ -46,27 +25,52 @@ class Form extends Component<
       avatarError: false,
       countryError: false,
       acceptError: false,
+
+      disabled: true,
     };
+
+    this.storage = [];
+    this.i = 0;
+
+    this.nameHandler.bind(this);
+    this.surnameHandler.bind(this);
+    this.birthDateHandler.bind(this);
+    this.countryHandler.bind(this);
+    this.avatarHandler.bind(this);
+    this.acceptHandler.bind(this);
+    this.submitHandler.bind(this);
   }
 
   nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      this.setState({ disabled: false });
+    }
     this.setState({ name: e.target.value });
   };
 
   surnameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      this.setState({ disabled: false });
+    }
     this.setState({ surname: e.target.value });
   };
 
-  birthDateHandler = (e: HTMLInputElement) => {
-    this.setState({ birthDate: e.value });
+  birthDateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      this.setState({ disabled: false });
+    }
+    this.setState({ birthDate: e.target.value });
   };
 
-  avatarHandler = (e: HTMLInputElement) => {
-    this.setState({ avatar: e.value });
+  avatarHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      this.setState({ disabled: false });
+    }
+    this.setState({ avatar: e.target.value });
   };
 
-  countryHandler = (e: HTMLSelectElement) => {
-    this.setState({ country: e.value });
+  countryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    this.setState({ country: e.target.value });
   };
 
   acceptHandler = () => {
@@ -78,18 +82,31 @@ class Form extends Component<
 
     if (this.state.name.length === 0) {
       this.setState({ nameError: true });
+    } else {
+      this.setState({ nameError: false });
     }
     if (this.state.surname.length === 0) {
       this.setState({ surnameError: true });
+    } else {
+      this.setState({ surnameError: false });
     }
     if (this.state.birthDate.length === 0) {
       this.setState({ birthDateError: true });
+    } else {
+      this.setState({ birthDateError: false });
     }
     if (this.state.avatar.length === 0) {
       this.setState({ avatarError: true });
+    } else {
+      this.setState({ avatarError: false });
     }
     if (this.state.accept === false) {
       this.setState({ acceptError: true });
+    } else {
+      this.setState({ acceptError: false });
+    }
+    if (this.state.name.length > 0 && this.state.surname.length > 0 && this.state.accept === true) {
+      this.storage = [...this.storage, this.state];
     }
   };
 
@@ -97,13 +114,13 @@ class Form extends Component<
     return (
       <>
         <div className={styles.wrapper}>
-          <form action="" onSubmit={this.submitHandler.bind(this)}>
+          <form action="" onSubmit={this.submitHandler}>
             <section className={styles.form}>
               <div className={`${styles.name} ${styles.block}`}>
                 <h2 className={`${styles.name_heading} ${styles.heading}`}>Name</h2>
                 <input
                   type="text"
-                  onChange={this.nameHandler.bind(this)}
+                  onChange={this.nameHandler}
                   className={`${styles.name_input} ${styles.input}`}
                 />
                 {this.state.nameError && (
@@ -114,7 +131,7 @@ class Form extends Component<
                 <h2 className={`${styles.surname_heading} ${styles.heading}`}>Surname</h2>
                 <input
                   type="text"
-                  onChange={this.surnameHandler.bind(this)}
+                  onChange={this.surnameHandler}
                   className={`${styles.surname_input} ${styles.input}`}
                 />
                 {this.state.surnameError && (
@@ -125,7 +142,7 @@ class Form extends Component<
                 <h2 className={`${styles.birth_heading} ${styles.heading}`}>Birth Date</h2>
                 <input
                   type="date"
-                  onChange={() => this.birthDateHandler.bind(this)}
+                  onChange={this.birthDateHandler}
                   className={`${styles.birth_input} ${styles.input}`}
                 />
                 {this.state.birthDateError && (
@@ -136,7 +153,7 @@ class Form extends Component<
                 <h2 className={`${styles.avatar_heading} ${styles.heading}`}>Avatar</h2>
                 <input
                   className={styles.avatar_button}
-                  onChange={() => this.avatarHandler.bind(this)}
+                  onChange={this.avatarHandler.bind(this)}
                   type="file"
                 />
                 {this.state.avatarError && <h3 className={styles.error}>You must choose Avatar</h3>}
@@ -145,7 +162,7 @@ class Form extends Component<
                 <h2 className={`${styles.country_heading} ${styles.heading}`}>
                   Choose your country
                 </h2>
-                <select name="country" id="country">
+                <select name="country" id="country" onChange={this.countryHandler}>
                   <List />
                 </select>
                 {this.state.countryError && (
@@ -156,7 +173,7 @@ class Form extends Component<
                 <label className={styles.agreement_switch}>
                   <input
                     type="checkbox"
-                    onClick={this.acceptHandler.bind(this)}
+                    onClick={this.acceptHandler}
                     className={styles.agreement_checkbox}
                   />
                   <span className={styles.agreement_slider}></span>
@@ -166,9 +183,26 @@ class Form extends Component<
               {this.state.acceptError && (
                 <h3 className={styles.error}>You must accept agreement</h3>
               )}
-              <button className={styles.submit}>Submit</button>
+              <button className={styles.submit} disabled={this.state.disabled}>
+                Submit
+              </button>
             </section>
           </form>
+        </div>
+        <div className={styles.form_wrapper}>
+          {this.storage.length > 0 &&
+            this.storage.map((item) => {
+              return (
+                <FormCards
+                  key={this.i++}
+                  name={item.name}
+                  surname={item.surname}
+                  birthDate={item.birthDate}
+                  avatar={item.avatar}
+                  country={item.country}
+                />
+              );
+            })}
         </div>
       </>
     );

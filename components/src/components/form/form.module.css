@@ -1,4 +1,4 @@
-h2, h3, input, button, select, option {
+h2, h3, input, button, select, option, b, span {
   font-family: 'Roboto';
 }
 
@@ -111,4 +111,28 @@ h2, h3, input, button, select, option {
 
 .error {
   color: red;
+}
+
+.form_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.form_avatar, .form_name, .form_surname, .form_birth, .form_country {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form_avatar_text, .form_name_text, .form_surname_text, .form_birth_text, .form_country_text, .form_avatar_bold {
+  word-wrap: break-word;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.form_avatar, .form_name, .form_surname, .form_birth {
+  width: 100% ;
+  border-bottom: 2px solid black;
 }
