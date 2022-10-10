@@ -4,6 +4,7 @@ import Search from 'components/mainPage/searchBar/searchBar';
 import setLocalStorage from './localStorageMock';
 import About from 'components/about/about';
 import NotFound from 'components/notFound/notFound';
+import Form from 'components/form/form';
 
 describe('Main', () => {
   it('Search placeholder', () => {
@@ -26,6 +27,32 @@ describe('Not Found', () => {
     render(<NotFound />);
     screen.debug();
     expect(screen.getByText(/Page Not Found/i)).toBeInTheDocument();
+  });
+});
+
+describe('Form', () => {
+  it('Search Headings', () => {
+    render(<Form />);
+    screen.debug();
+    expect(screen.getByText(/Surname/i)).toBeInTheDocument();
+  });
+
+  it('Search Headings', () => {
+    render(<Form />);
+    screen.debug();
+    expect(screen.getByText(/Avatar/i)).toBeInTheDocument();
+  });
+
+  it('Search Headings', () => {
+    render(<Form />);
+    screen.debug();
+    expect(screen.getByText(/Country/i)).toBeInTheDocument();
+  });
+
+  it('Search Headings', () => {
+    render(<Form />);
+    screen.debug();
+    expect(screen.getByText(/Date/i)).toBeInTheDocument();
   });
 });
 

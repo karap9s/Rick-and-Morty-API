@@ -1,5 +1,5 @@
 import { IFormCards } from 'components/interfaces/interfaces';
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, createRef } from 'react';
 import List from './countryList';
 import styles from './form.module.css';
 import FormCards from './formCards';
@@ -8,8 +8,22 @@ class Form extends Component<Record<string, never>, IFormCards> {
   storage: IFormCards[];
   i: number;
 
+  nameInput: React.RefObject<HTMLInputElement>;
+  surnameInput: React.RefObject<HTMLInputElement>;
+  dateInput: React.RefObject<HTMLInputElement>;
+  fileInput: React.RefObject<HTMLInputElement>;
+  countryInput: React.RefObject<HTMLSelectElement>;
+  acceptButton: React.RefObject<HTMLInputElement>;
+
   constructor(props: Record<string, never>) {
     super(props);
+
+    this.nameInput = createRef();
+    this.surnameInput = createRef();
+    this.dateInput = createRef();
+    this.fileInput = createRef();
+    this.countryInput = createRef();
+    this.acceptButton = createRef();
 
     this.state = {
       name: '',
@@ -67,6 +81,14 @@ class Form extends Component<Record<string, never>, IFormCards> {
       this.setState({ disabled: false });
     }
     this.setState({ avatar: e.target.value });
+    // const target: (EventTarget & HTMLInputElement) | (EventTarget & HTMLSelectElement) = e.target;
+    // const name: string = target.name;
+    // const picture: HTMLInputElement | null = this.fileInput.current;
+
+    // if (name === 'file' && picture?.files && picture.files.length) {
+    //   this.setState({ disabled: true });
+    //   this.setState({ avatar: URL.createObjectURL(picture.files[0]) });
+    // }
   };
 
   countryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -119,6 +141,7 @@ class Form extends Component<Record<string, never>, IFormCards> {
               <div className={`${styles.name} ${styles.block}`}>
                 <h2 className={`${styles.name_heading} ${styles.heading}`}>Name</h2>
                 <input
+                  ref={this.nameInput}
                   type="text"
                   onChange={this.nameHandler}
                   className={`${styles.name_input} ${styles.input}`}
@@ -130,6 +153,7 @@ class Form extends Component<Record<string, never>, IFormCards> {
               <div className={`${styles.surname} ${styles.block}`}>
                 <h2 className={`${styles.surname_heading} ${styles.heading}`}>Surname</h2>
                 <input
+                  ref={this.surnameInput}
                   type="text"
                   onChange={this.surnameHandler}
                   className={`${styles.surname_input} ${styles.input}`}
@@ -141,6 +165,7 @@ class Form extends Component<Record<string, never>, IFormCards> {
               <div className={`${styles.birth} ${styles.block}`}>
                 <h2 className={`${styles.birth_heading} ${styles.heading}`}>Birth Date</h2>
                 <input
+                  ref={this.dateInput}
                   type="date"
                   onChange={this.birthDateHandler}
                   className={`${styles.birth_input} ${styles.input}`}
@@ -152,8 +177,9 @@ class Form extends Component<Record<string, never>, IFormCards> {
               <div className={`${styles.avatar} ${styles.block}`}>
                 <h2 className={`${styles.avatar_heading} ${styles.heading}`}>Avatar</h2>
                 <input
+                  ref={this.fileInput}
                   className={styles.avatar_button}
-                  onChange={this.avatarHandler.bind(this)}
+                  onChange={this.avatarHandler}
                   type="file"
                 />
                 {this.state.avatarError && <h3 className={styles.error}>You must choose Avatar</h3>}
@@ -162,7 +188,12 @@ class Form extends Component<Record<string, never>, IFormCards> {
                 <h2 className={`${styles.country_heading} ${styles.heading}`}>
                   Choose your country
                 </h2>
-                <select name="country" id="country" onChange={this.countryHandler}>
+                <select
+                  ref={this.countryInput}
+                  name="country"
+                  id="country"
+                  onChange={this.countryHandler}
+                >
                   <List />
                 </select>
                 {this.state.countryError && (
@@ -172,6 +203,7 @@ class Form extends Component<Record<string, never>, IFormCards> {
               <div className={`${styles.agreement} ${styles.block}`}>
                 <label className={styles.agreement_switch}>
                   <input
+                    ref={this.acceptButton}
                     type="checkbox"
                     onClick={this.acceptHandler}
                     className={styles.agreement_checkbox}
@@ -181,7 +213,7 @@ class Form extends Component<Record<string, never>, IFormCards> {
                 <p className={styles.agreement_text}>Accept the agreement</p>
               </div>
               {this.state.acceptError && (
-                <h3 className={styles.error}>You must accept agreement</h3>
+                <h3 className={styles.error}>You must accept the agreement</h3>
               )}
               <button className={styles.submit} disabled={this.state.disabled}>
                 Submit
