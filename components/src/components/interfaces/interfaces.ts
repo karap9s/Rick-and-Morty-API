@@ -36,3 +36,5 @@ export interface IFormCards {
 
   disabled?: boolean;
 }
+
+export type TState = { cards: ICards[] };

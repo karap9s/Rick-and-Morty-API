@@ -67,6 +67,14 @@
   font-size: 34px;
 }
 
+.details {
+  width: 300px;
+}
+
 .details::backdrop {
   background: rgba(0, 0, 0, .3);
+}
+
+.name {
+  word-wrap: break-word;
 }
