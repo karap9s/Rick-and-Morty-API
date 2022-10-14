@@ -1,4 +1,4 @@
-import { getAllCharacters } from 'components/api/api';
+import { getAllCharacters, getFilterCharacters } from 'components/api/api';
 import { ICards, TState } from 'components/interfaces/interfaces';
 import React, { Component } from 'react';
 import Search from '../searchBar/searchBar';
@@ -6,6 +6,8 @@ import styles from './cards.module.css';
 
 class Cards extends Component<Record<string, never>, TState> {
   query: string;
+  arr: ICards[];
+  isLoad: boolean;
 
   constructor(props: Record<string, never>) {
     super(props);
@@ -14,20 +16,52 @@ class Cards extends Component<Record<string, never>, TState> {
       cards: [],
     };
 
-    this.query = '';
+    this.query = localStorage.getItem('search') || '';
+    this.arr = [];
+    this.isLoad = false;
   }
 
   async componentDidMount(): Promise<void> {
-    const arr = [];
-    for (let i = 1; i < 43; i++) {
-      const cards: ICards[] = await getAllCharacters(i);
-      arr.push(...cards);
+    if (!this.isLoad) {
+      for (let i = 1; i < 43; i++) {
+        const cards: ICards[] = await getAllCharacters(i);
+        this.arr.push(...cards);
+      }
+      this.setState({ cards: this.arr.filter((el) => el.name.includes(this.query)) });
+
+      this.isLoad = true;
     }
-    this.setState({ cards: arr.filter((el) => el.name.includes(this.query)) });
   }
+
+  // async componentDidMount(): Promise<void> {
+  //   // const arr = [];
+  //   if (this.isLoad) {
+  //     if (this.query === '') {
+  //       for (let i = 1; i < 43; i++) {
+  //         const cards: ICards[] = await getAllCharacters(i);
+  //         this.arr.push(...cards);
+  //       }
+  //     } else {
+  //       const cards: ICards[] = await getFilterCharacters(this.query);
+  //       this.arr.push(...cards);
+  //     }
+  //     this.setState({ cards: this.arr });
+  //   }
+  //   this.isLoad = true;
+  // }
+
+  // async componentDidMount(): Promise<void> {
+  //   for (let i = 1; i < 43; i++) {
+  //     const cards: ICards[] = await getAllCharacters(i);
+  //     this.arr.push(...cards);
+  //   }
+  //   this.setState({ cards: this.arr.filter((el) => el.name.includes(this.query)) });
+  // }
 
   updateData = (value: string): void => {
     this.query = value;
+    // this.setState({ cards: [] });
+    this.setState({ cards: this.arr.filter((el) => el.name.includes(this.query)) });
   };
 
   render() {

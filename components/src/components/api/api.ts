@@ -6,3 +6,9 @@ export const getAllCharacters = async (page: number) => {
   const data = await res.json();
   return data.results;
 };
+
+export const getFilterCharacters = async (name: string) => {
+  const res = await fetch(`${character}/?name=${name}`);
+  const data = await res.json();
+  return data.results;
+};
