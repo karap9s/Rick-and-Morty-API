@@ -38,3 +38,7 @@ export interface IFormCards {
 }
 
 export type TState = { cards: ICards[] };
+
+export type MyProps = {
+  updateData: (value: string) => void;
+};

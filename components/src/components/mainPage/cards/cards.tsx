@@ -5,7 +5,7 @@ import Search from '../searchBar/searchBar';
 import styles from './cards.module.css';
 
 class Cards extends Component<Record<string, never>, TState> {
-  open: boolean;
+  query: string;
 
   constructor(props: Record<string, never>) {
     super(props);
@@ -14,7 +14,7 @@ class Cards extends Component<Record<string, never>, TState> {
       cards: [],
     };
 
-    this.open = false;
+    this.query = '';
   }
 
   async componentDidMount(): Promise<void> {
@@ -23,14 +23,18 @@ class Cards extends Component<Record<string, never>, TState> {
       const cards: ICards[] = await getAllCharacters(i);
       arr.push(...cards);
     }
-    this.setState({ cards: arr });
+    this.setState({ cards: arr.filter((el) => el.name.includes(this.query)) });
   }
+
+  updateData = (value: string): void => {
+    this.query = value;
+  };
 
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.search_wrapper}>
-          <Search />
+          <Search updateData={this.updateData} />
         </div>
         <div className={styles.cards_wrapper}>
           {this.state.cards.map((card: ICards) => (
@@ -40,9 +44,7 @@ class Cards extends Component<Record<string, never>, TState> {
               <h3 className={styles.species}>Species: {card.species}</h3>
               <h3 className={styles.gender}>Gender: {card.gender}</h3>
               <h3 className={styles.gender}>Status: {card.status}</h3>
-              <button onClick={() => console.log('1')} className={styles.more}>
-                Show More
-              </button>
+              <button className={styles.more}>Show More</button>
               <dialog className={styles.details}>
                 <h2>Heading</h2>
                 <p>riiick</p>

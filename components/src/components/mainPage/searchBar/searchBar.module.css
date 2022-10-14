@@ -28,3 +28,10 @@
 .search_btn:hover {
   cursor: pointer;
 }
+
+select {
+  font-size: 22px;
+  border-right: 3px solid #783FE8;
+  outline: none;
+  cursor: pointer;
+}
