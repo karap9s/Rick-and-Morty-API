@@ -1,0 +1,74 @@
+.backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #fff;
+  width: 600px;
+}
+
+.episodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: purple;
+}
+
+.location_heading {
+  font-size: 28px;
+  color: rgb(70, 253, 33);
+}
+
+.location_name {
+  font-size: 20px;
+  color: rgb(70, 253, 33);
+}
+
+.dimension {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: wheat;
+  background-color: rgb(4, 197, 211);
+}
+
+.dimension_heading {
+  font-size: 28px;
+}
+
+.dimension_name {
+  font-size: 20px;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 600px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background-color: lightblue;
+}

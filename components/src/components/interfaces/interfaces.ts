@@ -17,6 +17,8 @@ export interface ICards {
   episode: string[];
   url: string;
   creater: string;
+  isOpen?: boolean;
+  modalHandler?: (value: boolean) => void;
 }
 
 export interface IFormCards {
@@ -37,7 +39,7 @@ export interface IFormCards {
   disabled?: boolean;
 }
 
-export type TState = { cards: ICards[] };
+export type TState = { cards: ICards[]; isOpen?: boolean; isCardsLoading?: boolean };
 
 export type MyProps = {
   updateData: (value: string) => void;

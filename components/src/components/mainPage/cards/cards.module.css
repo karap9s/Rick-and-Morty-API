@@ -76,5 +76,7 @@
 }
 
 .name {
+  text-align: center;
+  width: 300px;
   word-wrap: break-word;
 }

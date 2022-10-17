@@ -5,6 +5,7 @@ import setLocalStorage from './localStorageMock';
 import About from 'components/about/about';
 import NotFound from 'components/notFound/notFound';
 import Form from 'components/form/form';
+import { getAllCharacters, getFilterCharacters } from 'components/api/api';
 
 // describe('Main', () => {
 //   it('Search placeholder', () => {
@@ -88,5 +89,21 @@ describe('Mock Local Storage', () => {
 
     setLocalStorage(mockId, mockNewData);
     window.localStorage.setItem(mockId, JSON.stringify(mockNewData));
+  });
+});
+
+describe('Mock API Calls', () => {
+  test('Add "Rick" call', async () => {
+    const mockCall = 'Rick';
+    const response = await getFilterCharacters(mockCall);
+
+    expect(response).toEqual(await getFilterCharacters('Rick'));
+  });
+
+  test('Add empty call', async () => {
+    const mockCall = '';
+    const response = await getFilterCharacters(mockCall);
+
+    expect(response).toEqual(await getFilterCharacters(''));
   });
 });
