@@ -43,8 +43,31 @@ export type TState = { cards: ICards[]; isOpen?: boolean; isCardsLoading?: boole
 
 export type CardsProps = {
   query: string;
+  handleModal: (value: boolean, dataValue: ICards) => void;
 };
 
 export type SearchProps = {
   updateData: (value: string) => void;
 };
+
+// export type ModalProps = {
+//   id: number;
+//   name: string;
+//   status: string;
+//   species: string;
+//   type: string;
+//   gender: string;
+//   origin: {
+//     name: string;
+//     url: string;
+//   };
+//   location: {
+//     name: string;
+//     url: string;
+//   };
+//   image: string;
+//   episode: string[];
+//   url: string;
+//   creater: string;
+//   handleModal: (value: boolean, dataValue?: ICards) => void;
+// };

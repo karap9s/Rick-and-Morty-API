@@ -205,7 +205,34 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
               <h3 className={styles.species}>Species: {card.species}</h3>
               <h3 className={styles.gender}>Gender: {card.gender}</h3>
               <h3 className={styles.gender}>Status: {card.status}</h3>
-              <button className={styles.more}>Show More</button>
+              <button
+                onClick={() =>
+                  props.handleModal(true, {
+                    id: card.id,
+                    name: card.name,
+                    status: card.status,
+                    species: card.species,
+                    type: card.type,
+                    gender: card.gender,
+                    origin: {
+                      name: card.origin.name,
+                      url: card.origin.url,
+                    },
+                    location: {
+                      name: card.location.name,
+                      url: card.location.url,
+                    },
+                    image: card.image,
+                    episode: card.episode,
+                    url: card.url,
+                    creater: card.creater,
+                    isOpen: true,
+                  })
+                }
+                className={styles.more}
+              >
+                Show More
+              </button>
             </div>
           ))}
         </div>
