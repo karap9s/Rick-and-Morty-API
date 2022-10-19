@@ -41,6 +41,10 @@ export interface IFormCards {
 
 export type TState = { cards: ICards[]; isOpen?: boolean; isCardsLoading?: boolean };
 
-export type MyProps = {
+export type CardsProps = {
+  query: string;
+};
+
+export type SearchProps = {
   updateData: (value: string) => void;
 };

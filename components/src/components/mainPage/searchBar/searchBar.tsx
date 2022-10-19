@@ -1,68 +1,50 @@
-import React, { Component, FormEvent } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
-import { MyProps } from 'components/interfaces/interfaces';
+import { SearchProps } from 'components/interfaces/interfaces';
 
-class Search extends Component<MyProps, { value: string }> {
-  constructor(props: MyProps) {
-    super(props);
+const Search: React.FC<SearchProps> = (props: SearchProps) => {
+  const [search, setSearch] = useState(localStorage.getItem('search') || '');
 
-    this.state = {
-      value: localStorage.getItem('search') || '',
-    };
-
-    this.handlerBeforeUnload = this.handlerBeforeUnload.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handlerInput = (event: FormEvent<HTMLInputElement>): void => {
-    this.setState({ value: event.currentTarget.value });
+  const handlerInput = (event: FormEvent<HTMLInputElement>): void => {
+    setSearch(event.currentTarget.value);
   };
 
-  async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const { value } = this.state;
-    this.props.updateData(value);
-  }
+    props.updateData(search);
+  };
 
-  handlerBeforeUnload(): void {
-    localStorage.setItem('search', this.state.value);
-    window.removeEventListener('beforeunload', this.handlerBeforeUnload);
-  }
+  useEffect(() => {
+    localStorage.setItem('search', search);
+  });
 
-  componentDidMount(): void {
-    window.addEventListener('beforeunload', this.handlerBeforeUnload);
-    this.props.updateData(this.state.value);
-  }
+  useEffect(() => {
+    props.updateData(search);
+  }, []);
 
-  componentWillUnmount(): void {
-    this.handlerBeforeUnload();
-  }
-
-  render() {
-    return (
-      <>
-        <form onSubmit={this.handleSubmit} className={styles.search_form}>
-          <select name="filter" id="filter">
-            <option value="name">Name</option>
-            <option value="species">Species</option>
-            <option value="gender">Gender</option>
-            <option value="status">Status</option>
-          </select>
-          <input
-            className={styles.search}
-            type="text"
-            placeholder="Search..."
-            onChange={this.handlerInput}
-            value={this.state.value}
-          />
-          <button type="submit" className={styles.search_btn}>
-            <img src={Pic} alt="button" width={30} />
-          </button>
-        </form>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <form onSubmit={handleSubmit} className={styles.search_form}>
+        <select name="filter" id="filter">
+          <option value="name">Name</option>
+          <option value="species">Species</option>
+          <option value="gender">Gender</option>
+          <option value="status">Status</option>
+        </select>
+        <input
+          className={styles.search}
+          type="text"
+          placeholder="Search..."
+          onChange={handlerInput}
+          value={search}
+        />
+        <button type="submit" className={styles.search_btn}>
+          <img src={Pic} alt="button" width={30} />
+        </button>
+      </form>
+    </>
+  );
+};
 
 export default Search;
