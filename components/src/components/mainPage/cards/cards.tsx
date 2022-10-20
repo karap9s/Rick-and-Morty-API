@@ -2,6 +2,7 @@ import { getFilterCharacters } from 'components/api/api';
 import { CardsProps, ICards } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
 import React, { useEffect, useState } from 'react';
+import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
 
 const Cards: React.FC<CardsProps> = (props: CardsProps) => {
@@ -24,6 +25,8 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
     <div className={styles.wrapper}>
       {isCardsLoading ? (
         <Loader />
+      ) : cards === undefined ? (
+        <NoneCards />
       ) : (
         <div className={styles.cards_wrapper}>
           {cards.map((card: ICards) => (

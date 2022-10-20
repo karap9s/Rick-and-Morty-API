@@ -26,12 +26,6 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.search_form}>
-        <select name="filter" id="filter">
-          <option value="name">Name</option>
-          <option value="species">Species</option>
-          <option value="gender">Gender</option>
-          <option value="status">Status</option>
-        </select>
         <input
           className={styles.search}
           type="text"

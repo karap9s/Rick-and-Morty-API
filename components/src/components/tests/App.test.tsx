@@ -5,7 +5,7 @@ import setLocalStorage from './localStorageMock';
 import About from 'components/about/about';
 import NotFound from 'components/notFound/notFound';
 import Form from 'components/form/form';
-import { getAllCharacters, getFilterCharacters } from 'components/api/api';
+import { getFilterCharacters } from 'components/api/api';
 
 // describe('Main', () => {
 //   it('Search placeholder', () => {
@@ -57,15 +57,15 @@ describe('Form', () => {
   });
 });
 
-describe('Mock Local Storage', () => {
-  // it('Add data', () => {
-  //   render(<Search />);
-  //   const mockId = '1';
-  //   const mockJson = 'some data';
-  //   setLocalStorage(mockId, mockJson);
-  //   expect(localStorage.getItem(mockId)).toEqual(JSON.stringify(mockJson));
-  // });
-});
+// describe('Mock Local Storage', () => {
+//   it('Add data', () => {
+//     render(<Search />);
+//     const mockId = '1';
+//     const mockJson = 'some data';
+//     setLocalStorage(mockId, mockJson);
+//     expect(localStorage.getItem(mockId)).toEqual(JSON.stringify(mockJson));
+//   });
+// });
 
 describe('Mock Local Storage', () => {
   beforeEach(() => {
