@@ -27,6 +27,7 @@ export interface IFormCards {
   birthDate: string;
   avatar: string;
   country: string;
+  key: string;
   accept?: boolean;
 
   nameError?: boolean;
