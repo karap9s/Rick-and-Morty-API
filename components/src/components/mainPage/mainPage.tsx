@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Cards from './cards/cards';
 import Modal from './modal/modal';
 import Search from './searchBar/searchBar';
+import styles from './mainPage.module.css';
 
 const MainPage: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -23,7 +24,7 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <Search updateData={handleQueryChange} />
       <Cards handleModal={handleModal} query={name} />
       {isOpen && (
@@ -43,7 +44,7 @@ const MainPage: React.FC = () => {
           modalHandler={modalOpenChanger}
         />
       )}
-    </>
+    </div>
   );
 };
 

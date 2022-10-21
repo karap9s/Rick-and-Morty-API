@@ -21,6 +21,10 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
     call();
   }, [props.query, query]);
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className={styles.wrapper}>
       {isCardsLoading ? (
@@ -37,7 +41,7 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
               <h3 className={styles.gender}>Gender: {card.gender}</h3>
               <h3 className={styles.gender}>Status: {card.status}</h3>
               <button
-                onClick={() =>
+                onClick={() => {
                   props.handleModal(true, {
                     id: card.id,
                     name: card.name,
@@ -58,8 +62,9 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
                     url: card.url,
                     creater: card.creater,
                     isOpen: true,
-                  })
-                }
+                  });
+                  scrollToTop();
+                }}
                 className={styles.more}
               >
                 Show More
