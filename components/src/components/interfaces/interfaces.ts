@@ -44,11 +44,12 @@ export type TState = { cards: ICards[]; isOpen?: boolean; isCardsLoading?: boole
 
 export type CardsProps = {
   query: string;
+  type: string;
   handleModal: (value: boolean, dataValue: ICards) => void;
 };
 
 export type SearchProps = {
-  updateData: (value: string) => void;
+  updateData: (value: string, name: string) => void;
 };
 
 // export type ModalProps = {
@@ -72,3 +73,10 @@ export type SearchProps = {
 //   creater: string;
 //   handleModal: (value: boolean, dataValue?: ICards) => void;
 // };
+
+export type TSeries = {
+  name: string;
+  date: string;
+  episode: string;
+  key: string;
+};

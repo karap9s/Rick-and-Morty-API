@@ -9,12 +9,14 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
+  const [type, setType] = useState<string>('name');
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
+      setType(props.type);
       setQuery(props.query);
-      setCards(await getFilterCharacters(query));
+      setCards(await getFilterCharacters(type, query));
       setCardsLoading(false);
     }
 

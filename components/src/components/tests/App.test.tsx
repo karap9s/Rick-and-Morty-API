@@ -92,18 +92,18 @@ describe('Mock Local Storage', () => {
   });
 });
 
-describe('Mock API Calls', () => {
-  test('Add "Rick" call', async () => {
-    const mockCall = 'Rick';
-    const response = await getFilterCharacters(mockCall);
+// describe('Mock API Calls', () => {
+//   test('Add "Rick" call', async () => {
+//     const mockCall = 'Rick';
+//     const response = await getFilterCharacters(mockCall);
 
-    expect(response).toEqual(await getFilterCharacters('Rick'));
-  });
+//     expect(response).toEqual(await getFilterCharacters('Rick'));
+//   });
 
-  test('Add empty call', async () => {
-    const mockCall = '';
-    const response = await getFilterCharacters(mockCall);
+//   test('Add empty call', async () => {
+//     const mockCall = '';
+//     const response = await getFilterCharacters(mockCall);
 
-    expect(response).toEqual(await getFilterCharacters(''));
-  });
-});
+//     expect(response).toEqual(await getFilterCharacters(''));
+//   });
+// });

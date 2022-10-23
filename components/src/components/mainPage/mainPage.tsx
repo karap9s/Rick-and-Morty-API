@@ -8,9 +8,11 @@ import styles from './mainPage.module.css';
 const MainPage: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
+  const [type, setType] = useState<string>('name');
   const [card, setCard] = useState<ICards>({} as ICards);
 
-  const handleQueryChange = (name: string) => {
+  const handleQueryChange = (value: string, name: string) => {
+    setType(value);
     setName(name);
   };
 
@@ -26,7 +28,7 @@ const MainPage: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <Search updateData={handleQueryChange} />
-      <Cards handleModal={handleModal} query={name} />
+      <Cards handleModal={handleModal} query={name} type={type} />
       {isOpen && (
         <Modal
           id={card.id}

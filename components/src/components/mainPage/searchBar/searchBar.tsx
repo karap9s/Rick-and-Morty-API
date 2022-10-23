@@ -5,6 +5,7 @@ import { SearchProps } from 'components/interfaces/interfaces';
 
 const Search: React.FC<SearchProps> = (props: SearchProps) => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
+  const [type, setType] = useState('name');
 
   const handlerInput = (event: FormEvent<HTMLInputElement>): void => {
     setSearch(event.currentTarget.value);
@@ -12,7 +13,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    props.updateData(search);
+    props.updateData(type, search);
   };
 
   useEffect(() => {
@@ -20,12 +21,24 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   });
 
   useEffect(() => {
-    props.updateData(search);
+    props.updateData(type, search);
   }, []);
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.search_form}>
+        <select
+          onChange={(event) => {
+            setType(event.target.options[event.target.selectedIndex].text.toLowerCase());
+          }}
+          name="filter"
+          id="filter"
+        >
+          <option value="name">Name</option>
+          <option value="species">Species</option>
+          <option value="gender">Gender</option>
+          <option value="status">Status</option>
+        </select>
         <input
           className={styles.search}
           type="text"
