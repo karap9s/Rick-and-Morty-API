@@ -74,8 +74,8 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
           unknown: false,
         });
         break;
-      case 'unknown':
-        setGender(e.target.value.toLowerCase());
+      case 'unknown_second':
+        setGender('unknown');
         setCheckedGender({
           any: false,
           male: false,
