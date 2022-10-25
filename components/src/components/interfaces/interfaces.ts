@@ -97,3 +97,10 @@ export type TCheckedGender = {
   genderless: boolean;
   unknown: boolean;
 };
+
+export type TMainContext = {
+  gender: string;
+  setGender: React.Dispatch<React.SetStateAction<string>>;
+  status: string;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+};

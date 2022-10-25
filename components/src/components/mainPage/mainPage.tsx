@@ -32,7 +32,7 @@ const MainPage: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <MainContext.Provider value={'main'}>
+      <MainContext.Provider value={{ gender, setGender, status, setStatus }}>
         <Search updateData={handleQueryChange} />
         <Cards handleModal={handleModal} query={name} type={type} status={status} gender={gender} />
         {isOpen && (

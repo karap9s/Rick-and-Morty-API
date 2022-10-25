@@ -1,6 +1,6 @@
 import { getFilterCharacters } from 'components/api/api';
 import { MainContext } from 'components/context/context';
-import { CardsProps, ICards } from 'components/interfaces/interfaces';
+import { CardsProps, ICards, TMainContext } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
 import React, { useContext, useEffect, useState } from 'react';
 import NoneCards from '../noneCards/noneCards';
@@ -11,10 +11,9 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
   const [type, setType] = useState<string>('name');
-  const [gender, setGender] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
-
-  const msg = useContext(MainContext);
+  // const [gender, setGender] = useState<string>('');
+  // const [status, setStatus] = useState<string>('');
+  const { gender, setGender, status, setStatus } = useContext<TMainContext>(MainContext);
 
   useEffect(() => {
     async function call() {

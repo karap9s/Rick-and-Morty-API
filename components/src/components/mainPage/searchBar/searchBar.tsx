@@ -1,13 +1,18 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
-import { SearchProps, TCheckedGender, TCheckedStatus } from 'components/interfaces/interfaces';
+import {
+  SearchProps,
+  TCheckedGender,
+  TCheckedStatus,
+  TMainContext,
+} from 'components/interfaces/interfaces';
+import { MainContext } from 'components/context/context';
 
 const Search: React.FC<SearchProps> = (props: SearchProps) => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
   const [type, setType] = useState('name');
-  const [gender, setGender] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
+  const { gender, setGender, status, setStatus } = useContext<TMainContext>(MainContext);
 
   const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>({
     any: true,
