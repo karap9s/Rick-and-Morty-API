@@ -1,7 +1,8 @@
 import { getFilterCharacters } from 'components/api/api';
+import { MainContext } from 'components/context/context';
 import { CardsProps, ICards } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
 
@@ -10,13 +11,19 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
   const [type, setType] = useState<string>('name');
+  const [gender, setGender] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
+
+  const msg = useContext(MainContext);
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
       setType(props.type);
       setQuery(props.query);
-      setCards(await getFilterCharacters(type, query));
+      setGender(props.gender);
+      setStatus(props.status);
+      setCards(await getFilterCharacters(type, query, status, gender));
       setCardsLoading(false);
     }
 

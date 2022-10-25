@@ -45,11 +45,13 @@ export type TState = { cards: ICards[]; isOpen?: boolean; isCardsLoading?: boole
 export type CardsProps = {
   query: string;
   type: string;
+  status: string;
+  gender: string;
   handleModal: (value: boolean, dataValue: ICards) => void;
 };
 
 export type SearchProps = {
-  updateData: (value: string, name: string) => void;
+  updateData: (value: string, name: string, gender: string, status: string) => void;
 };
 
 // export type ModalProps = {
@@ -79,4 +81,19 @@ export type TSeries = {
   date: string;
   episode: string;
   key: string;
+};
+
+export type TCheckedStatus = {
+  any: boolean;
+  alive: boolean;
+  dead: boolean;
+  unknown: boolean;
+};
+
+export type TCheckedGender = {
+  any: boolean;
+  male: boolean;
+  female: boolean;
+  genderless: boolean;
+  unknown: boolean;
 };

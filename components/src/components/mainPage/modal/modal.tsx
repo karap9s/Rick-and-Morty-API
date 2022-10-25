@@ -1,11 +1,13 @@
 import { getAirDate, getEpisode, getEpisodeName } from 'components/api/api';
+import { MainContext } from 'components/context/context';
 import { ICards, TSeries } from 'components/interfaces/interfaces';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './modal.module.css';
 
 const Modal: React.FC<ICards> = (props: ICards) => {
   const [content, setContent] = useState<TSeries[]>([]);
   const [arr, setArr] = useState<TSeries[]>([]);
+  const msg = useContext(MainContext);
 
   // const series = async (episodes: string[]): Promise<void> => {
   //   setContent([] as TSeries[]);

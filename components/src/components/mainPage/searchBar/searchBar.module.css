@@ -1,13 +1,13 @@
 .search_form {
   border: 3px solid #783FE8;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   background-color: #783FE8;
 }
 
 .search {
   width: 400px;
-  height: 40px;
+  /* height: 40px; */
   align-items: center;
   border: none;
   padding: 0 20px;
@@ -36,4 +36,18 @@ select {
   border-right: 3px solid #783FE8;
   outline: none;
   cursor: pointer;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+}
+
+.search_wrapper {
+  display: flex;
 }
