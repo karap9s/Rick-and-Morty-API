@@ -9,25 +9,18 @@ import styles from './cards.module.css';
 const Cards: React.FC<CardsProps> = (props: CardsProps) => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>('');
-  const [type, setType] = useState<string>('name');
-  // const [gender, setGender] = useState<string>('');
-  // const [status, setStatus] = useState<string>('');
-  const { gender, setGender, status, setStatus } = useContext<TMainContext>(MainContext);
+
+  const { gender, status, name, type, setOpen } = useContext<TMainContext>(MainContext);
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
-      setType(props.type);
-      setQuery(props.query);
-      setGender(props.gender);
-      setStatus(props.status);
-      setCards(await getFilterCharacters(type, query, status, gender));
+      setCards(await getFilterCharacters(type, name, status, gender));
       setCardsLoading(false);
     }
 
     call();
-  }, [props.query, query]);
+  }, [name, type, status, gender]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -50,7 +43,7 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
               <h3 className={styles.gender}>Status: {card.status}</h3>
               <button
                 onClick={() => {
-                  props.handleModal(true, {
+                  props.handleModal({
                     id: card.id,
                     name: card.name,
                     status: card.status,
@@ -72,6 +65,7 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
                     isOpen: true,
                   });
                   scrollToTop();
+                  setOpen(true);
                 }}
                 className={styles.more}
               >

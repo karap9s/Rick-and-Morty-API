@@ -47,34 +47,12 @@ export type CardsProps = {
   type: string;
   status: string;
   gender: string;
-  handleModal: (value: boolean, dataValue: ICards) => void;
+  handleModal: (dataValue: ICards) => void;
 };
 
 export type SearchProps = {
   updateData: (value: string, name: string, gender: string, status: string) => void;
 };
-
-// export type ModalProps = {
-//   id: number;
-//   name: string;
-//   status: string;
-//   species: string;
-//   type: string;
-//   gender: string;
-//   origin: {
-//     name: string;
-//     url: string;
-//   };
-//   location: {
-//     name: string;
-//     url: string;
-//   };
-//   image: string;
-//   episode: string[];
-//   url: string;
-//   creater: string;
-//   handleModal: (value: boolean, dataValue?: ICards) => void;
-// };
 
 export type TSeries = {
   name: string;
@@ -103,4 +81,12 @@ export type TMainContext = {
   setGender: React.Dispatch<React.SetStateAction<string>>;
   status: string;
   setStatus: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  type: string;
+  setType: React.Dispatch<React.SetStateAction<string>>;
+  card: ICards;
+  setCard: React.Dispatch<React.SetStateAction<ICards>>;
+  isOpen: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

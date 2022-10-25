@@ -1,13 +1,14 @@
 import { getAirDate, getEpisode, getEpisodeName } from 'components/api/api';
 import { MainContext } from 'components/context/context';
-import { ICards, TSeries } from 'components/interfaces/interfaces';
+import { ICards, TMainContext, TSeries } from 'components/interfaces/interfaces';
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './modal.module.css';
 
-const Modal: React.FC<ICards> = (props: ICards) => {
+const Modal: React.FC<ICards> = () => {
   const [content, setContent] = useState<TSeries[]>([]);
   const [arr, setArr] = useState<TSeries[]>([]);
-  const msg = useContext(MainContext);
+
+  const { card, setOpen } = useContext<TMainContext>(MainContext);
 
   // const series = async (episodes: string[]): Promise<void> => {
   //   setContent([] as TSeries[]);
@@ -37,8 +38,8 @@ const Modal: React.FC<ICards> = (props: ICards) => {
       setContent([...arr]);
     };
 
-    series(props.episode);
-  }, [props.episode]);
+    series(card.episode);
+  }, [card.episode]);
 
   // const name = await getEpisodeName(Number(result));
   // const date = await getAirDate(Number(result));
@@ -55,17 +56,17 @@ const Modal: React.FC<ICards> = (props: ICards) => {
     <>
       <div className={styles.backdrop}>
         <div className={styles.modal_wrapper}>
-          <button onClick={() => props.modalHandler?.(false)} className={styles.close}>
+          <button onClick={() => setOpen(false)} className={styles.close}>
             X
           </button>
           <div className={styles.modal}>
             <div className={styles.location}>
               <h2 className={styles.location_heading}>Location</h2>
-              <p className={styles.location_name}>{props.location.name}</p>
+              <p className={styles.location_name}>{card.location.name}</p>
             </div>
             <div className={styles.dimension}>
               <h2 className={styles.dimension_heading}>Origin</h2>
-              <p className={styles.dimension_name}>{props.origin.name}</p>
+              <p className={styles.dimension_name}>{card.origin.name}</p>
             </div>
             <div className={styles.episodes}>
               <h2 className={styles.episodes_heading}>List of episodes</h2>
