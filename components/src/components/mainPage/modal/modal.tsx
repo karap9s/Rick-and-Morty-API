@@ -1,10 +1,10 @@
 import { getAirDate, getEpisode, getEpisodeName } from 'components/api/api';
 import { MainContext } from 'components/context/context';
-import { ICards, TMainContext, TSeries } from 'components/interfaces/interfaces';
+import { TMainContext, TSeries } from 'components/interfaces/interfaces';
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './modal.module.css';
 
-const Modal: React.FC<ICards> = () => {
+const Modal: React.FC = () => {
   const [content, setContent] = useState<TSeries[]>([]);
   const [arr, setArr] = useState<TSeries[]>([]);
 

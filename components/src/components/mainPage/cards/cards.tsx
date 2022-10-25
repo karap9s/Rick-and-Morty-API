@@ -1,16 +1,16 @@
 import { getFilterCharacters } from 'components/api/api';
 import { MainContext } from 'components/context/context';
-import { CardsProps, ICards, TMainContext } from 'components/interfaces/interfaces';
+import { ICards, TMainContext } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
 import React, { useContext, useEffect, useState } from 'react';
 import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
 
-const Cards: React.FC<CardsProps> = (props: CardsProps) => {
+const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { gender, status, name, type, setOpen } = useContext<TMainContext>(MainContext);
+  const { gender, status, name, type, setOpen, setCard } = useContext<TMainContext>(MainContext);
 
   useEffect(() => {
     async function call() {
@@ -43,7 +43,7 @@ const Cards: React.FC<CardsProps> = (props: CardsProps) => {
               <h3 className={styles.gender}>Status: {card.status}</h3>
               <button
                 onClick={() => {
-                  props.handleModal({
+                  setCard({
                     id: card.id,
                     name: card.name,
                     status: card.status,

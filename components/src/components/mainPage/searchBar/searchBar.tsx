@@ -1,18 +1,13 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
-import {
-  SearchProps,
-  TCheckedGender,
-  TCheckedStatus,
-  TMainContext,
-} from 'components/interfaces/interfaces';
+import { TCheckedGender, TCheckedStatus, TMainContext } from 'components/interfaces/interfaces';
 import { MainContext } from 'components/context/context';
 
-const Search: React.FC<SearchProps> = (props: SearchProps) => {
+const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
-  const [type, setType] = useState('name');
-  const { gender, setGender, status, setStatus } = useContext<TMainContext>(MainContext);
+  const { gender, setGender, status, setStatus, type, setType, setName } =
+    useContext<TMainContext>(MainContext);
 
   const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>({
     any: true,
@@ -34,7 +29,8 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    props.updateData(type, search, status, gender);
+
+    setName(search);
   };
 
   const handleRadioGender = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +138,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   });
 
   useEffect(() => {
-    props.updateData(type, search, gender, status);
+    setName(search);
   }, []);
 
   return (

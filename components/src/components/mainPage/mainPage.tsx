@@ -21,14 +21,6 @@ const MainPage: React.FC = () => {
     setGender(gender);
   };
 
-  const handleModal = (dataValue: ICards) => {
-    setCard(dataValue);
-  };
-
-  const modalOpenChanger = (value: boolean) => {
-    setOpen(value);
-  };
-
   return (
     <div className={styles.wrapper}>
       <MainContext.Provider
@@ -47,24 +39,9 @@ const MainPage: React.FC = () => {
           setOpen,
         }}
       >
-        <Search updateData={handleQueryChange} />
-        <Cards handleModal={handleModal} query={name} type={type} status={status} gender={gender} />
-        {isOpen && (
-          <Modal
-            id={card.id}
-            name={card.name}
-            status={card.status}
-            species={card.species}
-            type={card.type}
-            gender={card.gender}
-            origin={card.origin}
-            location={card.location}
-            image={card.image}
-            episode={card.episode}
-            url={card.url}
-            creater={card.creater}
-          />
-        )}
+        <Search />
+        <Cards />
+        {isOpen && <Modal />}
       </MainContext.Provider>
     </div>
   );
