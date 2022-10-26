@@ -10,17 +10,18 @@ const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { gender, status, name, type, setOpen, setCard } = useContext<TMainContext>(MainContext);
+  const { page, gender, status, name, type, setOpen, setCard } =
+    useContext<TMainContext>(MainContext);
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
-      setCards(await getFilterCharacters(type, name, status, gender));
+      setCards(await getFilterCharacters(page, type, name, status, gender));
       setCardsLoading(false);
     }
 
     call();
-  }, [name, type, status, gender]);
+  }, [page, name, type, status, gender]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);

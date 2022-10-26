@@ -77,6 +77,8 @@ export type TCheckedGender = {
 };
 
 export type TMainContext = {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   gender: string;
   setGender: React.Dispatch<React.SetStateAction<string>>;
   status: string;

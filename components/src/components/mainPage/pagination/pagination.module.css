@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 50px;
+  padding: 10px 0;
+}
+
+.line {
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.page {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.control {
+  width: 90px;
+}
+
+.disabled {
+  color: #B4B4B4;
+  background-color: #FAFAFA;
+}
+
+.disabled:hover {
+  background-color: #FAFAFA;
+  cursor: not-allowed;
+}
