@@ -14,13 +14,6 @@ const MainPage: React.FC = () => {
   const [gender, setGender] = useState<string>('');
   const [status, setStatus] = useState<string>('');
 
-  const handleQueryChange = (value: string, name: string, status: string, gender: string) => {
-    setType(value);
-    setName(name);
-    setStatus(status);
-    setGender(gender);
-  };
-
   return (
     <div className={styles.wrapper}>
       <MainContext.Provider

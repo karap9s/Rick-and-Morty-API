@@ -6,8 +6,7 @@ import { MainContext } from 'components/context/context';
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
-  const { gender, setGender, status, setStatus, type, setType, setName } =
-    useContext<TMainContext>(MainContext);
+  const { setGender, setStatus, setType, setName } = useContext<TMainContext>(MainContext);
 
   const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>({
     any: true,

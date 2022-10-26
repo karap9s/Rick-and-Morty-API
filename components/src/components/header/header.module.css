@@ -17,3 +17,9 @@
 .link:hover {
   color: red;
 }
+
+.active {
+  color: orange;
+  border-bottom: 2px solid orangered;
+  transition: .5s;
+}
