@@ -91,4 +91,31 @@ export type TMainContext = {
   setCard: React.Dispatch<React.SetStateAction<ICards>>;
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  pagesCount: number;
+  setPagesCount: React.Dispatch<React.SetStateAction<number>>;
 };
+
+// <button onClick={pageHandler} className={styles.page}>
+//           1
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           2
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           3
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           4
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           5
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           6
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           7
+//         </button>
+//         <button onClick={pageHandler} className={styles.page}>
+//           8
+//         </button>

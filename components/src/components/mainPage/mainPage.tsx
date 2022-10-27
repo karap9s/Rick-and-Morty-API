@@ -15,6 +15,7 @@ const MainPage: React.FC = () => {
   const [gender, setGender] = useState<string>('');
   const [status, setStatus] = useState<string>('');
   const [page, setPage] = useState<number>(1);
+  const [pagesCount, setPagesCount] = useState(0);
 
   return (
     <div className={styles.wrapper}>
@@ -34,6 +35,8 @@ const MainPage: React.FC = () => {
           setCard,
           isOpen,
           setOpen,
+          pagesCount,
+          setPagesCount,
         }}
       >
         <Search />

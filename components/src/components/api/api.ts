@@ -9,17 +9,23 @@ export const getAllCharacters = async (page: number) => {
 };
 
 export const getFilterCharacters = async (
-  page: number,
   value: string,
   name: string,
   status: string,
-  gender: string
+  gender: string,
+  page?: number
 ) => {
   const res = await fetch(
     `${character}/?page=${page}&${value}=${name}&status=${status}&gender=${gender}`
   );
   const data = await res.json();
   return data.results;
+};
+
+export const getPages = async (value: string, name: string, status: string, gender: string) => {
+  const res = await fetch(`${character}/?${value}=${name}&status=${status}&gender=${gender}`);
+  const data = await res.json();
+  return data.info.pages;
 };
 
 export const getEpisode = async (num: number) => {

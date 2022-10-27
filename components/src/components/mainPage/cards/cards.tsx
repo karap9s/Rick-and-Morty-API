@@ -1,4 +1,4 @@
-import { getFilterCharacters } from 'components/api/api';
+import { getFilterCharacters, getPages } from 'components/api/api';
 import { MainContext } from 'components/context/context';
 import { ICards, TMainContext } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
@@ -10,18 +10,19 @@ const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { page, gender, status, name, type, setOpen, setCard } =
+  const { page, gender, status, name, type, setOpen, setCard, setPagesCount } =
     useContext<TMainContext>(MainContext);
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
-      setCards(await getFilterCharacters(page, type, name, status, gender));
+      setCards(await getFilterCharacters(type, name, status, gender, page));
       setCardsLoading(false);
+      setPagesCount(await getPages(type, name, status, gender));
     }
 
     call();
-  }, [page, name, type, status, gender]);
+  }, [page, name, type, status, gender, setPagesCount]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
