@@ -3,7 +3,8 @@
   width: 100%;
   justify-content: center;
   height: 50px;
-  padding: 10px 0;
+  padding: 15px 0;
+  background-color: #EBEC67;
 }
 
 .line {
@@ -16,14 +17,20 @@
 .page {
   height: 50px;
   width: 50px;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 100px;
+  border: none;
+  background-color: #000000;
+  color: #EBEC67;
+  font-size: 20px;
+  transition: .5s;
 }
 
 .page:hover {
-  background-color: grey;
+  background-color: #fff;
+  color: #000000;
   cursor: pointer;
 }
 
@@ -42,6 +49,7 @@
 }
 
 .active {
-  border: 1px solid orange;
-  background-color: lightyellow;
+  width: 60px;
+  height: 60px;
+  background-color: #783FE8;
 }

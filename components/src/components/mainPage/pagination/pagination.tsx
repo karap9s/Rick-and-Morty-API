@@ -56,6 +56,7 @@ const Pagination: React.FC = () => {
         </button>
         {buttons.map((el: string | number) => (
           <button
+            disabled={el === '..' || el === '...' || el === '....'}
             key={el}
             onClick={pageHandler}
             className={`${styles.page} ${page === el && styles.active}`}
