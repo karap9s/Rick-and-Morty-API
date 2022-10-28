@@ -26,8 +26,6 @@
   border-radius: 100px;
   margin-bottom: 20px;
   background-color: #783FE8;
-  color: #A5F279;
-  font-size: 22px;
 }
 
 .more:hover {
@@ -79,4 +77,10 @@
   text-align: center;
   width: 300px;
   word-wrap: break-word;
+}
+
+.card_link {
+  color: #A5F279;
+  font-size: 22px;
+  text-decoration: none;
 }

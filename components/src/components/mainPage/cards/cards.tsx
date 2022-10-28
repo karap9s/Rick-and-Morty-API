@@ -3,6 +3,7 @@ import { MainContext } from 'components/context/context';
 import { ICards, TMainContext } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
 
@@ -10,7 +11,7 @@ const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { page, gender, status, name, type, setOpen, setCard, setPagesCount } =
+  const { page, gender, status, name, type, setCard, setPagesCount } =
     useContext<TMainContext>(MainContext);
 
   useEffect(() => {
@@ -43,35 +44,37 @@ const Cards: React.FC = () => {
               <h3 className={styles.species}>Species: {card.species}</h3>
               <h3 className={styles.gender}>Gender: {card.gender}</h3>
               <h3 className={styles.gender}>Status: {card.status}</h3>
-              <button
-                onClick={() => {
-                  setCard({
-                    id: card.id,
-                    name: card.name,
-                    status: card.status,
-                    species: card.species,
-                    type: card.type,
-                    gender: card.gender,
-                    origin: {
-                      name: card.origin.name,
-                      url: card.origin.url,
-                    },
-                    location: {
-                      name: card.location.name,
-                      url: card.location.url,
-                    },
-                    image: card.image,
-                    episode: card.episode,
-                    url: card.url,
-                    creater: card.creater,
-                    isOpen: true,
-                  });
-                  scrollToTop();
-                  setOpen(true);
-                }}
-                className={styles.more}
-              >
-                Show More
+              <button className={styles.more}>
+                <Link
+                  onClick={() => {
+                    setCard({
+                      id: card.id,
+                      name: card.name,
+                      status: card.status,
+                      species: card.species,
+                      type: card.type,
+                      gender: card.gender,
+                      origin: {
+                        name: card.origin.name,
+                        url: card.origin.url,
+                      },
+                      location: {
+                        name: card.location.name,
+                        url: card.location.url,
+                      },
+                      image: card.image,
+                      episode: card.episode,
+                      url: card.url,
+                      creater: card.creater,
+                      isOpen: true,
+                    });
+                    scrollToTop();
+                  }}
+                  className={`${styles.card_link}`}
+                  to="/info"
+                >
+                  About
+                </Link>
               </button>
             </div>
           ))}
