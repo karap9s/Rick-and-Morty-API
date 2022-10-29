@@ -1,5 +1,6 @@
+import { FormContext } from 'components/context/context';
 import { IFormCards } from 'components/interfaces/interfaces';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import List from './countryList';
 import styles from './form.module.css';
 import FormCards from './formCards';
@@ -11,16 +12,26 @@ const Form: React.FC = () => {
   const avatarRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLSelectElement>(null);
 
-  const [accept, setAccept] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [count, setCount] = useState(0);
-  const [storage, setStorage] = useState<IFormCards[]>([] as IFormCards[]);
-
-  const [nameError, setNameError] = useState(false);
-  const [surnameError, setSurnameError] = useState(false);
-  const [birthError, setBirthError] = useState(false);
-  const [avatarError, setAvatarError] = useState(false);
-  const [acceptError, setAcceptError] = useState(false);
+  const {
+    accept,
+    setAccept,
+    disabled,
+    setDisabled,
+    count,
+    setCount,
+    storage,
+    setStorage,
+    nameError,
+    setNameError,
+    surnameError,
+    setSurnameError,
+    birthError,
+    setBirthError,
+    avatarError,
+    setAvatarError,
+    acceptError,
+    setAcceptError,
+  } = useContext(FormContext);
 
   const nameHandler = () => {
     if (nameRef !== null) {

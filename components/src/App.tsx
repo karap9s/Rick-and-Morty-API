@@ -7,10 +7,12 @@ import About from 'components/about/about';
 import Header from 'components/header/header';
 import Form from 'components/form/form';
 import { FormContext, MainContext } from 'components/context/context';
-import { ICards } from 'components/interfaces/interfaces';
+import { ICards, IFormCards } from 'components/interfaces/interfaces';
 import Modal from 'components/mainPage/modal/modal';
 
 function App() {
+  // Main Context
+
   const [name, setName] = useState<string>('');
   const [type, setType] = useState<string>('name');
   const [card, setCard] = useState<ICards>({} as ICards);
@@ -21,12 +23,29 @@ function App() {
   );
   const [pagesCount, setPagesCount] = useState(0);
   const [currentCharacter, setCurrentCharacter] = useState('');
-  const [nope, setNope] = useState('');
+  const [active, setActive] = useState(localStorage.getItem('activePage') || 'home');
+
+  // Form Context
+
+  const [accept, setAccept] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [count, setCount] = useState(0);
+  const [storage, setStorage] = useState<IFormCards[]>(
+    JSON.parse(localStorage.getItem('formStorage') || JSON.stringify([] as IFormCards[]))
+  );
+
+  const [nameError, setNameError] = useState(false);
+  const [surnameError, setSurnameError] = useState(false);
+  const [birthError, setBirthError] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
+  const [acceptError, setAcceptError] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('gender', gender);
     localStorage.setItem('status', status);
     localStorage.setItem('page', JSON.stringify(page));
+    localStorage.setItem('activePage', active);
+    localStorage.setItem('formStorage', JSON.stringify(storage));
   });
 
   return (
@@ -48,9 +67,32 @@ function App() {
         setPagesCount,
         currentCharacter,
         setCurrentCharacter,
+        active,
+        setActive,
       }}
     >
-      <FormContext.Provider value={{ nope }}>
+      <FormContext.Provider
+        value={{
+          accept,
+          setAccept,
+          disabled,
+          setDisabled,
+          count,
+          setCount,
+          storage,
+          setStorage,
+          nameError,
+          setNameError,
+          surnameError,
+          setSurnameError,
+          birthError,
+          setBirthError,
+          avatarError,
+          setAvatarError,
+          acceptError,
+          setAcceptError,
+        }}
+      >
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />

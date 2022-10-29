@@ -93,8 +93,27 @@ export type TMainContext = {
   setPagesCount: React.Dispatch<React.SetStateAction<number>>;
   currentCharacter: string;
   setCurrentCharacter: React.Dispatch<React.SetStateAction<string>>;
+  active: string;
+  setActive: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type TFormContext = {
-  nope: string;
+  accept: boolean;
+  setAccept: React.Dispatch<React.SetStateAction<boolean>>;
+  disabled: boolean;
+  setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+  storage: IFormCards[];
+  setStorage: React.Dispatch<React.SetStateAction<IFormCards[]>>;
+  nameError: boolean;
+  setNameError: React.Dispatch<React.SetStateAction<boolean>>;
+  surnameError: boolean;
+  setSurnameError: React.Dispatch<React.SetStateAction<boolean>>;
+  birthError: boolean;
+  setBirthError: React.Dispatch<React.SetStateAction<boolean>>;
+  avatarError: boolean;
+  setAvatarError: React.Dispatch<React.SetStateAction<boolean>>;
+  acceptError: boolean;
+  setAcceptError: React.Dispatch<React.SetStateAction<boolean>>;
 };

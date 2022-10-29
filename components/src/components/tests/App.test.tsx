@@ -31,31 +31,31 @@ describe('Not Found', () => {
   });
 });
 
-describe('Form', () => {
-  it('Search Headings', () => {
-    render(<Form />);
-    screen.debug();
-    expect(screen.getByText(/Surname/i)).toBeInTheDocument();
-  });
+// describe('Form', () => {
+//   it('Search Headings', () => {
+//     render(<Form />);
+//     screen.debug();
+//     expect(screen.getByText(/Surname/i)).toBeInTheDocument();
+//   });
 
-  it('Search Headings', () => {
-    render(<Form />);
-    screen.debug();
-    expect(screen.getByText(/Avatar/i)).toBeInTheDocument();
-  });
+//   it('Search Headings', () => {
+//     render(<Form />);
+//     screen.debug();
+//     expect(screen.getByText(/Avatar/i)).toBeInTheDocument();
+//   });
 
-  it('Search Headings', () => {
-    render(<Form />);
-    screen.debug();
-    expect(screen.getByText(/Country/i)).toBeInTheDocument();
-  });
+//   it('Search Headings', () => {
+//     render(<Form />);
+//     screen.debug();
+//     expect(screen.getByText(/Country/i)).toBeInTheDocument();
+//   });
 
-  it('Search Headings', () => {
-    render(<Form />);
-    screen.debug();
-    expect(screen.getByText(/Date/i)).toBeInTheDocument();
-  });
-});
+//   it('Search Headings', () => {
+//     render(<Form />);
+//     screen.debug();
+//     expect(screen.getByText(/Date/i)).toBeInTheDocument();
+//   });
+// });
 
 // describe('Mock Local Storage', () => {
 //   it('Add data', () => {
