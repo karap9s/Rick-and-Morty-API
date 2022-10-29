@@ -91,6 +91,8 @@ export type TMainContext = {
   setCard: React.Dispatch<React.SetStateAction<ICards>>;
   pagesCount: number;
   setPagesCount: React.Dispatch<React.SetStateAction<number>>;
+  currentCharacter: string;
+  setCurrentCharacter: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type TFormContext = {

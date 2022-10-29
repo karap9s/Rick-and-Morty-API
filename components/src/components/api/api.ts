@@ -28,20 +28,8 @@ export const getPages = async (value: string, name: string, status: string, gend
   return data.info.pages;
 };
 
-export const getEpisode = async (num: number) => {
+export const getEpisodeData = async (num: number) => {
   const res = await fetch(`${episode}/${num}`);
   const data = await res.json();
-  return data.episode;
-};
-
-export const getAirDate = async (num: number) => {
-  const res = await fetch(`${episode}/${num}`);
-  const data = await res.json();
-  return data.air_date;
-};
-
-export const getEpisodeName = async (num: number) => {
-  const res = await fetch(`${episode}/${num}`);
-  const data = await res.json();
-  return data.name;
+  return data;
 };

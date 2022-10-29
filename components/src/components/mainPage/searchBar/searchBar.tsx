@@ -8,19 +8,30 @@ const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
   const { setGender, setStatus, setType, setName } = useContext<TMainContext>(MainContext);
 
-  const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>({
-    any: true,
-    alive: false,
-    dead: false,
-    unknown: false,
-  });
-  const [checkedGender, setCheckedGender] = useState<TCheckedGender>({
-    any: true,
-    male: false,
-    female: false,
-    genderless: false,
-    unknown: false,
-  });
+  const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>(
+    JSON.parse(
+      localStorage.getItem('checkedStatus') ||
+        JSON.stringify({
+          any: true,
+          alive: false,
+          dead: false,
+          unknown: false,
+        })
+    )
+  );
+
+  const [checkedGender, setCheckedGender] = useState<TCheckedGender>(
+    JSON.parse(
+      localStorage.getItem('checkedGender') ||
+        JSON.stringify({
+          any: true,
+          male: false,
+          female: false,
+          genderless: false,
+          unknown: false,
+        })
+    )
+  );
 
   const handlerInput = (event: FormEvent<HTMLInputElement>): void => {
     setSearch(event.currentTarget.value);
@@ -134,6 +145,8 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem('search', search);
+    localStorage.setItem('checkedGender', JSON.stringify(checkedGender));
+    localStorage.setItem('checkedStatus', JSON.stringify(checkedStatus));
   });
 
   useEffect(() => {

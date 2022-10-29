@@ -11,7 +11,7 @@ const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { page, gender, status, name, type, setCard, setPagesCount } =
+  const { page, gender, status, name, type, setCard, setPagesCount, setCurrentCharacter } =
     useContext<TMainContext>(MainContext);
 
   useEffect(() => {
@@ -68,6 +68,7 @@ const Cards: React.FC = () => {
                       creater: card.creater,
                       isOpen: true,
                     });
+                    setCurrentCharacter(card.name);
                     scrollToTop();
                   }}
                   className={`${styles.card_link}`}

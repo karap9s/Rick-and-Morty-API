@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from 'components/notFound/notFound';
@@ -14,11 +14,17 @@ function App() {
   const [name, setName] = useState<string>('');
   const [type, setType] = useState<string>('name');
   const [card, setCard] = useState<ICards>({} as ICards);
-  const [gender, setGender] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
+  const [gender, setGender] = useState<string>(localStorage.getItem('gender') || '');
+  const [status, setStatus] = useState<string>(localStorage.getItem('status') || '');
   const [page, setPage] = useState<number>(1);
   const [pagesCount, setPagesCount] = useState(0);
+  const [currentCharacter, setCurrentCharacter] = useState('');
   const [nope, setNope] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('gender', gender);
+    localStorage.setItem('status', status);
+  });
 
   return (
     <MainContext.Provider
@@ -37,6 +43,8 @@ function App() {
         setCard,
         pagesCount,
         setPagesCount,
+        currentCharacter,
+        setCurrentCharacter,
       }}
     >
       <FormContext.Provider value={{ nope }}>
