@@ -16,7 +16,9 @@ function App() {
   const [card, setCard] = useState<ICards>({} as ICards);
   const [gender, setGender] = useState<string>(localStorage.getItem('gender') || '');
   const [status, setStatus] = useState<string>(localStorage.getItem('status') || '');
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(
+    JSON.parse(localStorage.getItem('page') || JSON.stringify(1))
+  );
   const [pagesCount, setPagesCount] = useState(0);
   const [currentCharacter, setCurrentCharacter] = useState('');
   const [nope, setNope] = useState('');
@@ -24,6 +26,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('gender', gender);
     localStorage.setItem('status', status);
+    localStorage.setItem('page', JSON.stringify(page));
   });
 
   return (
