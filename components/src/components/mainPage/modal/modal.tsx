@@ -17,6 +17,7 @@ const Modal: React.FC = () => {
         const last = item.lastIndexOf('/');
         const result = item.substring(last + 1, item.length);
         const data = await getEpisodeData(Number(result));
+        console.log(data);
         setContent((prev) => [
           ...prev,
           {

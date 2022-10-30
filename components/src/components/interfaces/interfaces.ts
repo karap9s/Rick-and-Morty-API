@@ -76,6 +76,16 @@ export type TCheckedGender = {
   unknown: boolean;
 };
 
+export type TEpisodes = {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters: string[];
+  url: string;
+  created: string;
+};
+
 export type TMainContext = {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
