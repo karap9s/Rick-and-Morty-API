@@ -17,7 +17,6 @@ const Modal: React.FC = () => {
         const last = item.lastIndexOf('/');
         const result = item.substring(last + 1, item.length);
         const data = await getEpisodeData(Number(result));
-        console.log(data);
         setContent((prev) => [
           ...prev,
           {
@@ -39,11 +38,9 @@ const Modal: React.FC = () => {
         <Navigate to="/" />
       ) : (
         <div className={styles.modal_wrapper}>
-          <button className={styles.close}>
-            <Link onClick={() => setCurrentCharacter('')} className={styles.close_link} to={'/'}>
-              Back
-            </Link>
-          </button>
+          <Link onClick={() => setCurrentCharacter('')} className={styles.close_link} to={'/'}>
+            <button className={styles.close}>Back</button>
+          </Link>
           <div className={styles.modal}>
             <div className={styles.location}>
               <h2 className={styles.location_heading}>Location</h2>

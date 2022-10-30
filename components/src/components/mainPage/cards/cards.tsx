@@ -44,39 +44,37 @@ const Cards: React.FC = () => {
               <h3 className={styles.species}>Species: {card.species}</h3>
               <h3 className={styles.gender}>Gender: {card.gender}</h3>
               <h3 className={styles.gender}>Status: {card.status}</h3>
-              <button className={styles.more}>
-                <Link
-                  onClick={() => {
-                    setCard({
-                      id: card.id,
-                      name: card.name,
-                      status: card.status,
-                      species: card.species,
-                      type: card.type,
-                      gender: card.gender,
-                      origin: {
-                        name: card.origin.name,
-                        url: card.origin.url,
-                      },
-                      location: {
-                        name: card.location.name,
-                        url: card.location.url,
-                      },
-                      image: card.image,
-                      episode: card.episode,
-                      url: card.url,
-                      creater: card.creater,
-                      isOpen: true,
-                    });
-                    setCurrentCharacter(card.name);
-                    scrollToTop();
-                  }}
-                  className={`${styles.card_link}`}
-                  to="/info"
-                >
-                  About
-                </Link>
-              </button>
+              <Link
+                onClick={() => {
+                  setCard({
+                    id: card.id,
+                    name: card.name,
+                    status: card.status,
+                    species: card.species,
+                    type: card.type,
+                    gender: card.gender,
+                    origin: {
+                      name: card.origin.name,
+                      url: card.origin.url,
+                    },
+                    location: {
+                      name: card.location.name,
+                      url: card.location.url,
+                    },
+                    image: card.image,
+                    episode: card.episode,
+                    url: card.url,
+                    creater: card.creater,
+                    isOpen: true,
+                  });
+                  setCurrentCharacter(card.name);
+                  scrollToTop();
+                }}
+                className={`${styles.card_link}`}
+                to="/info"
+              >
+                <button className={styles.more}>About</button>
+              </Link>
             </div>
           ))}
         </div>
