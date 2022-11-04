@@ -33,41 +33,41 @@ const Form: React.FC = () => {
     setAcceptError,
   } = useContext(FormContext);
 
-  const nameHandler = () => {
+  const nameHandler = (): void => {
     if (nameRef !== null) {
       setDisabled(false);
     }
   };
 
-  const surnameHandler = () => {
+  const surnameHandler = (): void => {
     if (surnameRef !== null) {
       setDisabled(false);
     }
   };
 
-  const birthHandler = () => {
+  const birthHandler = (): void => {
     if (birthRef !== null) {
       setDisabled(false);
     }
   };
 
-  const avatarHandler = () => {
+  const avatarHandler = (): void => {
     if (avatarRef !== null) {
       setDisabled(false);
     }
   };
 
-  const countryHandler = () => {
+  const countryHandler = (): void => {
     if (countryRef !== null) {
       setDisabled(false);
     }
   };
 
-  const acceptHandler = () => {
+  const acceptHandler = (): void => {
     setAccept(!accept);
   };
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     if (nameRef.current?.value.length === 0) {
@@ -199,7 +199,7 @@ const Form: React.FC = () => {
         </form>
       </div>
       <div className={styles.form_wrapper}>
-        {storage.length > 0 &&
+        {storage.length &&
           storage.map((item) => {
             return (
               <FormCards
