@@ -11,52 +11,52 @@ const Form: React.FC = () => {
   const avatarRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLSelectElement>(null);
 
-  const [accept, setAccept] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [count, setCount] = useState(0);
+  const [accept, setAccept] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [count, setCount] = useState<number>(0);
   const [storage, setStorage] = useState<IFormCards[]>([] as IFormCards[]);
 
-  const [nameError, setNameError] = useState(false);
-  const [surnameError, setSurnameError] = useState(false);
-  const [birthError, setBirthError] = useState(false);
-  const [avatarError, setAvatarError] = useState(false);
-  const [acceptError, setAcceptError] = useState(false);
+  const [nameError, setNameError] = useState<boolean>(false);
+  const [surnameError, setSurnameError] = useState<boolean>(false);
+  const [birthError, setBirthError] = useState<boolean>(false);
+  const [avatarError, setAvatarError] = useState<boolean>(false);
+  const [acceptError, setAcceptError] = useState<boolean>(false);
 
-  const nameHandler = () => {
+  const nameHandler = (): void => {
     if (nameRef !== null) {
       setDisabled(false);
     }
   };
 
-  const surnameHandler = () => {
+  const surnameHandler = (): void => {
     if (surnameRef !== null) {
       setDisabled(false);
     }
   };
 
-  const birthHandler = () => {
+  const birthHandler = (): void => {
     if (birthRef !== null) {
       setDisabled(false);
     }
   };
 
-  const avatarHandler = () => {
+  const avatarHandler = (): void => {
     if (avatarRef !== null) {
       setDisabled(false);
     }
   };
 
-  const countryHandler = () => {
+  const countryHandler = (): void => {
     if (countryRef !== null) {
       setDisabled(false);
     }
   };
 
-  const acceptHandler = () => {
+  const acceptHandler = (): void => {
     setAccept(!accept);
   };
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     if (nameRef.current?.value.length === 0) {
@@ -188,7 +188,7 @@ const Form: React.FC = () => {
         </form>
       </div>
       <div className={styles.form_wrapper}>
-        {storage.length > 0 &&
+        {storage.length &&
           storage.map((item) => {
             return (
               <FormCards

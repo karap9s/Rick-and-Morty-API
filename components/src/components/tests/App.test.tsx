@@ -7,13 +7,17 @@ import NotFound from 'components/notFound/notFound';
 import Form from 'components/form/form';
 import { getFilterCharacters } from 'components/api/api';
 
-// describe('Main', () => {
-//   it('Search placeholder', () => {
-//     render(<Search />);
-//     screen.debug();
-//     expect(screen.getByPlaceholderText(/Search.../i)).toBeInTheDocument();
-//   });
-// });
+const handleQueryChange = (name: string) => {
+  console.log(name);
+};
+
+describe('Main', () => {
+  it('Search placeholder', () => {
+    render(<Search updateData={handleQueryChange} />);
+    screen.debug();
+    expect(screen.getByPlaceholderText(/Search.../i)).toBeInTheDocument();
+  });
+});
 
 describe('About', () => {
   it("Search author's name", () => {
@@ -57,15 +61,14 @@ describe('Form', () => {
   });
 });
 
-// describe('Mock Local Storage', () => {
-//   it('Add data', () => {
-//     render(<Search />);
-//     const mockId = '1';
-//     const mockJson = 'some data';
-//     setLocalStorage(mockId, mockJson);
-//     expect(localStorage.getItem(mockId)).toEqual(JSON.stringify(mockJson));
-//   });
-// });
+describe('Mock Local Storage', () => {
+  it('Add data', () => {
+    const mockId = '1';
+    const mockJson = 'some data';
+    setLocalStorage(mockId, mockJson);
+    expect(localStorage.getItem(mockId)).toEqual(JSON.stringify(mockJson));
+  });
+});
 
 describe('Mock Local Storage', () => {
   beforeEach(() => {
@@ -94,16 +97,22 @@ describe('Mock Local Storage', () => {
 
 describe('Mock API Calls', () => {
   test('Add "Rick" call', async () => {
-    const mockCall = 'Rick';
-    const response = await getFilterCharacters(mockCall);
+    const mockValue = 'Name';
+    const mockName = 'Rick';
+    const mockStatus = 'Dead';
+    const mockGender = 'Male';
+    const response = await getFilterCharacters(mockValue, mockName, mockStatus, mockGender);
 
-    expect(response).toEqual(await getFilterCharacters('Rick'));
+    expect(response).toEqual(await getFilterCharacters('Name', 'Rick', 'Dead', 'Male'));
   });
 
   test('Add empty call', async () => {
-    const mockCall = '';
-    const response = await getFilterCharacters(mockCall);
+    const mockValue = '';
+    const mockName = '';
+    const mockStatus = '';
+    const mockGender = '';
+    const response = await getFilterCharacters(mockValue, mockName, mockStatus, mockGender);
 
-    expect(response).toEqual(await getFilterCharacters(''));
+    expect(response).toEqual(await getFilterCharacters('', '', '', ''));
   });
 });
