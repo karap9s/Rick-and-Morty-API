@@ -3,7 +3,7 @@ import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
 import { TCheckedGender, TCheckedStatus } from 'components/interfaces/interfaces';
 import { useAppDispatch } from '../../../hooks';
-import { setGender, setName, setStatus, setType } from '../../redux/toolkitSlice';
+import { setGender, setName, setStatus, setType } from '../../redux/mainSlice';
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');

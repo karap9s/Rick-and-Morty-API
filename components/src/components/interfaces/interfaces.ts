@@ -130,7 +130,7 @@ export type TFormContext = {
   setAcceptError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export interface IMainReducer {
+export interface IReducer {
   main: {
     page: number;
     gender: string;
@@ -141,6 +141,17 @@ export interface IMainReducer {
     pagesCount: number;
     currentCharacter: string;
     active: string;
+  };
+  form: {
+    accept: boolean;
+    disabled: boolean;
+    count: number;
+    storage: IFormCards[];
+    nameError: boolean;
+    surnameError: boolean;
+    birthError: boolean;
+    avatarError: boolean;
+    acceptError: boolean;
   };
 }
 

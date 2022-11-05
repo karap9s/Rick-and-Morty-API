@@ -1,22 +1,22 @@
 import { getFilterCharacters, getPages } from 'components/api/api';
-import { ICards, IMainReducer } from 'components/interfaces/interfaces';
+import { ICards, IReducer } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setCard, setCurrentCharacter } from '../../redux/toolkitSlice';
+import { setCard, setCurrentCharacter } from '../../redux/mainSlice';
 
 const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const page = useAppSelector((state: IMainReducer) => state.main.page);
-  const name = useAppSelector((state: IMainReducer) => state.main.name);
-  const type = useAppSelector((state: IMainReducer) => state.main.type);
-  const status = useAppSelector((state: IMainReducer) => state.main.status);
-  const gender = useAppSelector((state: IMainReducer) => state.main.gender);
+  const page = useAppSelector((state: IReducer) => state.main.page);
+  const name = useAppSelector((state: IReducer) => state.main.name);
+  const type = useAppSelector((state: IReducer) => state.main.type);
+  const status = useAppSelector((state: IReducer) => state.main.status);
+  const gender = useAppSelector((state: IReducer) => state.main.gender);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

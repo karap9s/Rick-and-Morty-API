@@ -1,6 +1,18 @@
 import { FormContext } from 'components/context/context';
-import { IFormCards } from 'components/interfaces/interfaces';
+import { IFormCards, IReducer } from 'components/interfaces/interfaces';
 import React, { useContext, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import {
+  countIncrement,
+  setAccept,
+  setAcceptError,
+  setAvatarError,
+  setBirthError,
+  setDisabled,
+  setNameError,
+  setStorage,
+  setSurnameError,
+} from '../redux/formSlice';
 import List from './countryList';
 import styles from './form.module.css';
 import FormCards from './formCards';
@@ -12,106 +24,99 @@ const Form: React.FC = () => {
   const avatarRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLSelectElement>(null);
 
-  const {
-    accept,
-    setAccept,
-    disabled,
-    setDisabled,
-    count,
-    setCount,
-    storage,
-    setStorage,
-    nameError,
-    setNameError,
-    surnameError,
-    setSurnameError,
-    birthError,
-    setBirthError,
-    avatarError,
-    setAvatarError,
-    acceptError,
-    setAcceptError,
-  } = useContext(FormContext);
+  const accept = useAppSelector((state: IReducer) => state.form.accept);
+  const disabled = useAppSelector((state: IReducer) => state.form.disabled);
+  const count = useAppSelector((state: IReducer) => state.form.count);
+  const storage = useAppSelector((state: IReducer) => state.form.storage);
+  const nameError = useAppSelector((state: IReducer) => state.form.nameError);
+  const surnameError = useAppSelector((state: IReducer) => state.form.surnameError);
+  const birthError = useAppSelector((state: IReducer) => state.form.birthError);
+  const avatarError = useAppSelector((state: IReducer) => state.form.avatarError);
+  const acceptError = useAppSelector((state: IReducer) => state.form.acceptError);
+
+  const dispatch = useAppDispatch();
 
   const nameHandler = (): void => {
     if (nameRef !== null) {
-      setDisabled(false);
+      dispatch(setDisabled(false));
     }
   };
 
   const surnameHandler = (): void => {
     if (surnameRef !== null) {
-      setDisabled(false);
+      dispatch(setDisabled(false));
     }
   };
 
   const birthHandler = (): void => {
     if (birthRef !== null) {
-      setDisabled(false);
+      dispatch(setDisabled(false));
     }
   };
 
   const avatarHandler = (): void => {
     if (avatarRef !== null) {
-      setDisabled(false);
+      dispatch(setDisabled(false));
     }
   };
 
   const countryHandler = (): void => {
     if (countryRef !== null) {
-      setDisabled(false);
+      dispatch(setDisabled(false));
     }
   };
 
   const acceptHandler = (): void => {
-    setAccept(!accept);
+    dispatch(setAccept(!accept));
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     if (nameRef.current?.value.length === 0) {
-      setNameError(true);
+      dispatch(setNameError(true));
     } else {
-      setNameError(false);
+      dispatch(setNameError(false));
     }
     if (surnameRef.current?.value.length === 0) {
-      setSurnameError(true);
+      dispatch(setSurnameError(true));
     } else {
-      setSurnameError(false);
+      dispatch(setSurnameError(false));
     }
     if (birthRef.current?.value.length === 0) {
-      setBirthError(true);
+      dispatch(setBirthError(true));
     } else {
-      setBirthError(false);
+      dispatch(setBirthError(false));
     }
     if (avatarRef.current?.value.length === 0) {
-      setAvatarError(true);
+      dispatch(setAvatarError(true));
     } else {
-      setAvatarError(false);
+      dispatch(setAvatarError(false));
     }
     if (accept === false) {
-      setAcceptError(true);
+      dispatch(setAcceptError(true));
     } else {
-      setAcceptError(false);
+      dispatch(setAcceptError(false));
     }
     if (
       nameRef.current?.value.length !== 0 &&
       surnameRef.current?.value.length !== 0 &&
       accept === true
     ) {
-      setStorage([
-        ...storage,
-        {
-          name: nameRef.current?.value,
-          surname: surnameRef.current?.value,
-          birthDate: birthRef.current?.value,
-          avatar: avatarRef.current?.value,
-          country: countryRef.current?.value,
-          key: count.toString(),
-        } as IFormCards,
-      ]);
-      setCount(count + 1);
+      dispatch(
+        setStorage([
+          ...storage,
+          {
+            name: nameRef.current?.value,
+            surname: surnameRef.current?.value,
+            birthDate: birthRef.current?.value,
+            avatar: avatarRef.current?.value,
+            country: countryRef.current?.value,
+            key: count.toString(),
+          } as IFormCards,
+        ])
+      );
+      dispatch(countIncrement());
 
       if (
         nameRef.current?.value &&

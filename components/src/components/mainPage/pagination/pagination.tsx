@@ -1,15 +1,14 @@
-import { MainContext } from 'components/context/context';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './pagination.module.css';
 import { useDispatch } from 'react-redux';
-import { IMainReducer } from '../../interfaces/interfaces';
-import { decrement, increment, pageHandler } from '../../redux/toolkitSlice';
+import { IReducer } from '../../interfaces/interfaces';
+import { decrement, increment, pageHandler } from '../../redux/mainSlice';
 import { useAppSelector } from '../../../hooks';
 
 const Pagination: React.FC = () => {
   // const { page, setPage, pagesCount } = useContext(MainContext);
-  const page = useAppSelector((state: IMainReducer) => state.main.page);
-  const pagesCount = useAppSelector((state: IMainReducer) => state.main.pagesCount);
+  const page = useAppSelector((state: IReducer) => state.main.page);
+  const pagesCount = useAppSelector((state: IReducer) => state.main.pagesCount);
   const dispatch = useDispatch();
   const [buttons, setButtons] = useState<(string | number)[]>([] as (string | number)[]);
 
