@@ -1,14 +1,18 @@
 import { getEpisodeData } from 'components/api/api';
-import { MainContext } from 'components/context/context';
-import { TMainContext, TSeries } from 'components/interfaces/interfaces';
-import React, { useContext, useEffect, useState } from 'react';
+import { IReducer, TSeries } from 'components/interfaces/interfaces';
+import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { setCurrentCharacter } from '../../redux/mainSlice';
 import styles from './modal.module.css';
 
 const Modal: React.FC = () => {
   const [content, setContent] = useState<TSeries[]>([]);
 
-  const { card, currentCharacter, setCurrentCharacter } = useContext<TMainContext>(MainContext);
+  const card = useAppSelector((state: IReducer) => state.main.card);
+  const currentCharacter = useAppSelector((state: IReducer) => state.main.currentCharacter);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const series = async (episodes: string[]): Promise<void> => {
@@ -16,7 +20,7 @@ const Modal: React.FC = () => {
         const item = episodes[i];
         const last = item.lastIndexOf('/');
         const result = item.substring(last + 1, item.length);
-        const data = await getEpisodeData(Number(result));
+        const data = dispatch(getEpisodeData({ result: Number(result) }));
         setContent((prev) => [
           ...prev,
           {
@@ -30,7 +34,7 @@ const Modal: React.FC = () => {
     };
 
     series(card.episode);
-  }, [card.episode]);
+  }, [card.episode, dispatch]);
 
   return (
     <>
@@ -38,7 +42,11 @@ const Modal: React.FC = () => {
         <Navigate to="/" />
       ) : (
         <div className={styles.modal_wrapper}>
-          <Link onClick={() => setCurrentCharacter('')} className={styles.close_link} to={'/'}>
+          <Link
+            onClick={() => dispatch(setCurrentCharacter(''))}
+            className={styles.close_link}
+            to={'/'}
+          >
             <button className={styles.close}>Back</button>
           </Link>
           <div className={styles.modal}>

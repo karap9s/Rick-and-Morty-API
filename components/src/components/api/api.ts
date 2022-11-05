@@ -5,36 +5,25 @@ const BASE_URL = 'https://rickandmortyapi.com/api';
 const character = `${BASE_URL}/character`;
 const episode = `${BASE_URL}/episode`;
 
-export const getAllCharacters = async (page: number): Promise<ICards[]> => {
-  const res = await fetch(`${character}/?page=${page}`);
-  const data = await res.json();
-  return data.results;
-};
+export const getAllCharacters = createAsyncThunk<ICards[], { page: number }>(
+  'main/getAllCharacters',
+  async (arg) => {
+    const res = await fetch(`${character}/?page=${arg.page}`);
+    const data = await res.json();
+    return data.results;
+  }
+);
 
-export const getFilterCharacters = async (
-  value: string,
-  name: string,
-  status: string,
-  gender: string,
-  page?: number
-): Promise<ICards[]> => {
-  const res = await fetch(
-    `${character}/?page=${page}&${value}=${name}&status=${status}&gender=${gender}`
-  );
-  const data = await res.json();
-  return data.results;
-};
-
-// export const getPages = async (
-//   value: string,
-//   name: string,
-//   status: string,
-//   gender: string
-// ): Promise<number> => {
-//   const res = await fetch(`${character}/?${value}=${name}&status=${status}&gender=${gender}`);
-//   const data = await res.json();
-//   return data.info.pages;
-// };
+export const getFilterCharacters = createAsyncThunk<ICards[], TGetPages>(
+  'main/getFilterCharacters',
+  async (arg) => {
+    const res = await fetch(
+      `${character}/?page=${arg.page}&${arg.type}=${arg.name}&status=${arg.status}&gender=${arg.gender}`
+    );
+    const data = await res.json();
+    return data.results;
+  }
+);
 
 export const getPages = createAsyncThunk<number, TGetPages>('main/getPages', async (arg) => {
   const res = await fetch(
@@ -44,8 +33,11 @@ export const getPages = createAsyncThunk<number, TGetPages>('main/getPages', asy
   return data.info.pages;
 });
 
-export const getEpisodeData = async (num: number): Promise<TEpisodes> => {
-  const res = await fetch(`${episode}/${num}`);
-  const data = await res.json();
-  return data;
-};
+export const getEpisodeData = createAsyncThunk<TEpisodes, { result: number }>(
+  'main/getEpisodeData',
+  async (arg) => {
+    const res = await fetch(`${episode}/${arg.result}`);
+    const data = await res.json();
+    return data;
+  }
+);

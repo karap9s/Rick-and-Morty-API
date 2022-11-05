@@ -1,6 +1,5 @@
-import { FormContext } from 'components/context/context';
 import { IFormCards, IReducer } from 'components/interfaces/interfaces';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   countIncrement,

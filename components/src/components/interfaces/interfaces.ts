@@ -141,6 +141,7 @@ export interface IReducer {
     pagesCount: number;
     currentCharacter: string;
     active: string;
+    cardsArray: ICards[];
   };
   form: {
     accept: boolean;
@@ -160,6 +161,7 @@ export type TGetPages = {
   name: string;
   status: string;
   gender: string;
+  page?: number;
 };
 
 export type RootState = ReturnType<typeof store.getState>;

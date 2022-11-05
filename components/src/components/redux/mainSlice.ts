@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getPages } from '../api/api';
+import { getFilterCharacters, getPages } from '../api/api';
 import { ICards } from '../interfaces/interfaces';
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   pagesCount: 0,
   currentCharacter: '',
   active: localStorage.getItem('activePage') || 'home',
+  cardsArray: [] as ICards[],
 };
 
 const mainSlice = createSlice({
@@ -35,28 +36,28 @@ const mainSlice = createSlice({
       state.card = action.payload;
     },
     setCurrentCharacter(state, action: PayloadAction<string>) {
-      state.name = action.payload;
+      state.currentCharacter = action.payload;
     },
     setName(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
     setGender(state, action: PayloadAction<string>) {
-      state.name = action.payload;
+      state.gender = action.payload;
     },
     setType(state, action: PayloadAction<string>) {
-      state.name = action.payload;
+      state.type = action.payload;
     },
     setStatus(state, action: PayloadAction<string>) {
-      state.name = action.payload;
+      state.status = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPages.pending, () => {
-        console.log('pending');
-      })
       .addCase(getPages.fulfilled, (state, action) => {
         state.pagesCount = action.payload;
+      })
+      .addCase(getFilterCharacters.fulfilled, (state, action) => {
+        state.cardsArray = action.payload;
       });
   },
 });

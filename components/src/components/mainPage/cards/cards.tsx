@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setCard, setCurrentCharacter } from '../../redux/mainSlice';
 
 const Cards: React.FC = () => {
-  const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
   const page = useAppSelector((state: IReducer) => state.main.page);
@@ -17,12 +16,14 @@ const Cards: React.FC = () => {
   const type = useAppSelector((state: IReducer) => state.main.type);
   const status = useAppSelector((state: IReducer) => state.main.status);
   const gender = useAppSelector((state: IReducer) => state.main.gender);
+  const cardsArray = useAppSelector((state: IReducer) => state.main.cardsArray);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
-      setCards(await getFilterCharacters(type, name, status, gender, page));
+      dispatch(getFilterCharacters({ type, name, status, gender, page }));
       setCardsLoading(false);
       dispatch(getPages({ type, name, status, gender }));
     }
@@ -38,11 +39,11 @@ const Cards: React.FC = () => {
     <div className={styles.wrapper}>
       {isCardsLoading ? (
         <Loader />
-      ) : cards === undefined ? (
+      ) : cardsArray === undefined ? (
         <NoneCards />
       ) : (
         <div className={styles.cards_wrapper}>
-          {cards.map((card: ICards) => (
+          {cardsArray.map((card: ICards) => (
             <div className={styles.card} key={card.id}>
               <img className={styles.image} src={card.image} alt={card.name} />
               <h1 className={styles.name}>{card.name}</h1>
