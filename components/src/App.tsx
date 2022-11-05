@@ -13,6 +13,8 @@ import { store } from './components/redux/rootReducer';
 import { useAppSelector } from './hooks';
 
 function App() {
+  // Main Context
+
   const gender = useAppSelector((state: IMainReducer) => state.main.gender);
   const status = useAppSelector((state: IMainReducer) => state.main.status);
   const page = useAppSelector((state: IMainReducer) => state.main.page);
@@ -41,28 +43,6 @@ function App() {
   });
 
   return (
-    // <MainContext.Provider
-    //   value={{
-    //     // page,
-    //     // setPage,
-    //     gender,
-    //     setGender,
-    //     status,
-    //     setStatus,
-    //     name,
-    //     setName,
-    //     type,
-    //     setType,
-    //     card,
-    //     setCard,
-    //     // pagesCount,
-    //     // setPagesCount,
-    //     currentCharacter,
-    //     setCurrentCharacter,
-    //     active,
-    //     setActive,
-    //   }}
-    // >
     //   <FormContext.Provider
     //     value={{
     //       accept,
@@ -97,7 +77,6 @@ function App() {
       </Routes>
     </Provider>
     // </FormContext.Provider>
-    // </MainContext.Provider>
   );
 }
 

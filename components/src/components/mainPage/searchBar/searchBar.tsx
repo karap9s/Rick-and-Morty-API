@@ -1,12 +1,13 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styles from './searchBar.module.css';
 import Pic from '../../../assets/icons/1200px-Magnifying_glass_icon.png';
-import { TCheckedGender, TCheckedStatus, TMainContext } from 'components/interfaces/interfaces';
-import { MainContext } from 'components/context/context';
+import { TCheckedGender, TCheckedStatus } from 'components/interfaces/interfaces';
+import { useAppDispatch } from '../../../hooks';
+import { setGender, setName, setStatus, setType } from '../../redux/toolkitSlice';
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
-  const { setGender, setStatus, setType, setName } = useContext<TMainContext>(MainContext);
+  const dispatch = useAppDispatch();
 
   const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>(
     JSON.parse(
@@ -40,13 +41,13 @@ const Search: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
-    setName(search);
+    dispatch(setName(search));
   };
 
   const handleRadioGender = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.value.toLowerCase()) {
       case 'any':
-        setGender('');
+        dispatch(setGender(''));
         setCheckedGender({
           any: true,
           male: false,
@@ -56,7 +57,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'male':
-        setGender(e.target.value.toLowerCase());
+        dispatch(setGender(e.target.value.toLowerCase()));
         setCheckedGender({
           any: false,
           male: true,
@@ -103,7 +104,7 @@ const Search: React.FC = () => {
   const handleRadioStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.value.toLowerCase()) {
       case 'any':
-        setStatus('');
+        dispatch(setStatus(''));
         setCheckedStatus({
           any: true,
           alive: false,
@@ -112,7 +113,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'alive':
-        setStatus(e.target.value.toLowerCase());
+        dispatch(setStatus(e.target.value.toLowerCase()));
         setCheckedStatus({
           any: false,
           alive: true,
@@ -121,7 +122,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'dead':
-        setStatus(e.target.value.toLowerCase());
+        dispatch(setStatus(e.target.value.toLowerCase()));
         setCheckedStatus({
           any: false,
           alive: false,
@@ -130,7 +131,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'unknown':
-        setStatus(e.target.value.toLowerCase());
+        dispatch(setStatus(e.target.value.toLowerCase()));
         setCheckedStatus({
           any: false,
           alive: false,
@@ -150,7 +151,7 @@ const Search: React.FC = () => {
   });
 
   useEffect(() => {
-    setName(search);
+    dispatch(setName(search));
   }, []);
 
   return (
@@ -206,7 +207,9 @@ const Search: React.FC = () => {
         <div className={styles.search_wrapper}>
           <select
             onChange={(event) => {
-              setType(event.target.options[event.target.selectedIndex].text.toLowerCase());
+              dispatch(
+                setType(event.target.options[event.target.selectedIndex].text.toLowerCase())
+              );
             }}
             name="filter"
             id="filter"

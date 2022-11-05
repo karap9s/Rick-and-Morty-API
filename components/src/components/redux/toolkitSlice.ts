@@ -37,6 +37,18 @@ const mainSlice = createSlice({
     setCurrentCharacter(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
+    setName(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
+    setGender(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
+    setType(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
+    setStatus(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,5 +63,14 @@ const mainSlice = createSlice({
 
 export default mainSlice.reducer;
 
-export const { increment, decrement, pageHandler, setCard, setCurrentCharacter } =
-  mainSlice.actions;
+export const {
+  increment,
+  decrement,
+  pageHandler,
+  setCard,
+  setCurrentCharacter,
+  setName,
+  setGender,
+  setType,
+  setStatus,
+} = mainSlice.actions;
