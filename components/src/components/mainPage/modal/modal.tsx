@@ -3,33 +3,26 @@ import { IReducer, TSeries } from 'components/interfaces/interfaces';
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setCurrentCharacter } from '../../redux/mainSlice';
+import { setContent, setCurrentCharacter } from '../../redux/mainSlice';
 import styles from './modal.module.css';
 
 const Modal: React.FC = () => {
-  const [content, setContent] = useState<TSeries[]>([]);
+  // const [content, setContent] = useState<TSeries[]>([]);
 
   const card = useAppSelector((state: IReducer) => state.main.card);
   const currentCharacter = useAppSelector((state: IReducer) => state.main.currentCharacter);
+  const content = useAppSelector((state: IReducer) => state.main.content);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const series = async (episodes: string[]): Promise<void> => {
+      dispatch(setContent());
       for (let i = 0; i < episodes.length; i++) {
         const item = episodes[i];
         const last = item.lastIndexOf('/');
         const result = item.substring(last + 1, item.length);
-        const data = dispatch(getEpisodeData({ result: Number(result) }));
-        setContent((prev) => [
-          ...prev,
-          {
-            name: data.name,
-            date: data.air_date,
-            episode: data.episode,
-            key: (i + 1).toString(),
-          },
-        ]);
+        dispatch(getEpisodeData({ result: Number(result) }));
       }
     };
 

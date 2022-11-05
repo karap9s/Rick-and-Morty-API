@@ -142,6 +142,8 @@ export interface IReducer {
     currentCharacter: string;
     active: string;
     cardsArray: ICards[];
+    content: TSeries[];
+    numberOfKey: number;
   };
   form: {
     accept: boolean;

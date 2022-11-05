@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getFilterCharacters, getPages } from '../api/api';
-import { ICards } from '../interfaces/interfaces';
+import { getEpisodeData, getFilterCharacters, getPages } from '../api/api';
+import { ICards, TSeries } from '../interfaces/interfaces';
 
 const initialState = {
   page: JSON.parse(localStorage.getItem('page') || JSON.stringify(1)),
@@ -13,6 +13,8 @@ const initialState = {
   currentCharacter: '',
   active: localStorage.getItem('activePage') || 'home',
   cardsArray: [] as ICards[],
+  content: [] as TSeries[],
+  numberOfKey: 0,
 };
 
 const mainSlice = createSlice({
@@ -50,6 +52,10 @@ const mainSlice = createSlice({
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
+    setContent(state) {
+      state.content = [];
+      state.numberOfKey = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,6 +64,17 @@ const mainSlice = createSlice({
       })
       .addCase(getFilterCharacters.fulfilled, (state, action) => {
         state.cardsArray = action.payload;
+      })
+      .addCase(getEpisodeData.fulfilled, (state, action) => {
+        state.content = [
+          ...state.content,
+          {
+            name: action.payload.name,
+            date: action.payload.air_date,
+            episode: action.payload.episode,
+            key: (++state.numberOfKey).toString(),
+          },
+        ];
       });
   },
 });
@@ -74,4 +91,5 @@ export const {
   setGender,
   setType,
   setStatus,
+  setContent,
 } = mainSlice.actions;
