@@ -1,26 +1,17 @@
 import { MainContext } from 'components/context/context';
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './pagination.module.css';
+import { useDispatch } from 'react-redux';
+import { IMainReducer } from '../../interfaces/interfaces';
+import { decrement, increment, pageHandler } from '../../redux/toolkitSlice';
+import { useAppSelector } from '../../../hooks';
 
 const Pagination: React.FC = () => {
-  const { page, setPage, pagesCount } = useContext(MainContext);
+  // const { page, setPage, pagesCount } = useContext(MainContext);
+  const page = useAppSelector((state: IMainReducer) => state.main.page);
+  const pagesCount = useAppSelector((state: IMainReducer) => state.main.pagesCount);
+  const dispatch = useDispatch();
   const [buttons, setButtons] = useState<(string | number)[]>([] as (string | number)[]);
-
-  const pageHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setPage(Number((e.target as HTMLButtonElement).textContent));
-  };
-
-  const prevHandler = () => {
-    if (page !== 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const nextHandler = () => {
-    if (page !== pagesCount) {
-      setPage(page + 1);
-    }
-  };
 
   useEffect(() => {
     const getPagination = () => {
@@ -48,23 +39,33 @@ const Pagination: React.FC = () => {
     setButtons(getPagination);
   }, [pagesCount, page]);
 
+  const handler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(pageHandler(Number((e.target as HTMLButtonElement).textContent)));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.line}>
-        <button onClick={prevHandler} className={`${styles.page} ${styles.control}`}>
+        <button
+          onClick={() => dispatch(decrement())}
+          className={`${styles.page} ${styles.control}`}
+        >
           Previous
         </button>
         {buttons.map((el: string | number) => (
           <button
             disabled={el === '..' || el === '...' || el === '....'}
             key={el}
-            onClick={pageHandler}
+            onClick={handler}
             className={`${styles.page} ${page === el && styles.active}`}
           >
             {el}
           </button>
         ))}
-        <button onClick={nextHandler} className={`${styles.page} ${styles.control}`}>
+        <button
+          onClick={() => dispatch(increment())}
+          className={`${styles.page} ${styles.control}`}
+        >
           Next
         </button>
       </div>

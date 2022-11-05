@@ -1,3 +1,5 @@
+import { store } from '../redux/rootReducer';
+
 export interface ICards {
   id: number;
   name: string;
@@ -87,8 +89,8 @@ export type TEpisodes = {
 };
 
 export type TMainContext = {
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  // page: number;
+  // setPage: React.Dispatch<React.SetStateAction<number>>;
   gender: string;
   setGender: React.Dispatch<React.SetStateAction<string>>;
   status: string;
@@ -99,8 +101,8 @@ export type TMainContext = {
   setType: React.Dispatch<React.SetStateAction<string>>;
   card: ICards;
   setCard: React.Dispatch<React.SetStateAction<ICards>>;
-  pagesCount: number;
-  setPagesCount: React.Dispatch<React.SetStateAction<number>>;
+  // pagesCount: number;
+  // setPagesCount: React.Dispatch<React.SetStateAction<number>>;
   currentCharacter: string;
   setCurrentCharacter: React.Dispatch<React.SetStateAction<string>>;
   active: string;
@@ -127,3 +129,28 @@ export type TFormContext = {
   acceptError: boolean;
   setAcceptError: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export interface IMainReducer {
+  main: {
+    page: number;
+    gender: string;
+    status: string;
+    name: string;
+    type: string;
+    card: ICards;
+    pagesCount: number;
+    currentCharacter: string;
+    active: string;
+  };
+}
+
+export type TGetPages = {
+  type: string;
+  name: string;
+  status: string;
+  gender: string;
+};
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

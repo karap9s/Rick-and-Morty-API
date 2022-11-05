@@ -1,29 +1,34 @@
 import { getFilterCharacters, getPages } from 'components/api/api';
-import { MainContext } from 'components/context/context';
-import { ICards, TMainContext } from 'components/interfaces/interfaces';
+import { ICards, IMainReducer } from 'components/interfaces/interfaces';
 import { Loader } from 'components/loader/loader';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NoneCards from '../noneCards/noneCards';
 import styles from './cards.module.css';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { setCard, setCurrentCharacter } from '../../redux/toolkitSlice';
 
 const Cards: React.FC = () => {
   const [cards, setCards] = useState<ICards[]>([]);
   const [isCardsLoading, setCardsLoading] = useState<boolean>(false);
 
-  const { page, gender, status, name, type, setCard, setPagesCount, setCurrentCharacter } =
-    useContext<TMainContext>(MainContext);
+  const page = useAppSelector((state: IMainReducer) => state.main.page);
+  const name = useAppSelector((state: IMainReducer) => state.main.name);
+  const type = useAppSelector((state: IMainReducer) => state.main.type);
+  const status = useAppSelector((state: IMainReducer) => state.main.status);
+  const gender = useAppSelector((state: IMainReducer) => state.main.gender);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function call() {
       setCardsLoading(true);
       setCards(await getFilterCharacters(type, name, status, gender, page));
       setCardsLoading(false);
-      setPagesCount(await getPages(type, name, status, gender));
+      dispatch(getPages({ type, name, status, gender }));
     }
 
     call();
-  }, [page, name, type, status, gender, setPagesCount]);
+  }, [page, name, type, status, gender, dispatch]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -46,28 +51,30 @@ const Cards: React.FC = () => {
               <h3 className={styles.gender}>Status: {card.status}</h3>
               <Link
                 onClick={() => {
-                  setCard({
-                    id: card.id,
-                    name: card.name,
-                    status: card.status,
-                    species: card.species,
-                    type: card.type,
-                    gender: card.gender,
-                    origin: {
-                      name: card.origin.name,
-                      url: card.origin.url,
-                    },
-                    location: {
-                      name: card.location.name,
-                      url: card.location.url,
-                    },
-                    image: card.image,
-                    episode: card.episode,
-                    url: card.url,
-                    creater: card.creater,
-                    isOpen: true,
-                  });
-                  setCurrentCharacter(card.name);
+                  dispatch(
+                    setCard({
+                      id: card.id,
+                      name: card.name,
+                      status: card.status,
+                      species: card.species,
+                      type: card.type,
+                      gender: card.gender,
+                      origin: {
+                        name: card.origin.name,
+                        url: card.origin.url,
+                      },
+                      location: {
+                        name: card.location.name,
+                        url: card.location.url,
+                      },
+                      image: card.image,
+                      episode: card.episode,
+                      url: card.url,
+                      creater: card.creater,
+                      isOpen: true,
+                    })
+                  );
+                  dispatch(setCurrentCharacter(card.name));
                   scrollToTop();
                 }}
                 className={`${styles.card_link}`}
