@@ -107,7 +107,7 @@
 //     const mockName = '';
 //     const mockStatus = '';
 //     const mockGender = '';
-//     const response = await getFilterCharacters(mockValue, mockName, mockStatus, mockGender);
+//     const response = getFilterCharacters(mockValue, mockName, mockStatus, mockGender);
 
 //     expect(response).toEqual(await getFilterCharacters('', '', '', ''));
 //   });

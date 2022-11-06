@@ -1,14 +1,12 @@
 import { getEpisodeData } from 'components/api/api';
-import { IReducer, TSeries } from 'components/interfaces/interfaces';
-import React, { useEffect, useState } from 'react';
+import { IReducer } from 'components/interfaces/interfaces';
+import React, { useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setContent, setCurrentCharacter } from '../../redux/mainSlice';
 import styles from './modal.module.css';
 
 const Modal: React.FC = () => {
-  // const [content, setContent] = useState<TSeries[]>([]);
-
   const card = useAppSelector((state: IReducer) => state.main.card);
   const currentCharacter = useAppSelector((state: IReducer) => state.main.currentCharacter);
   const content = useAppSelector((state: IReducer) => state.main.content);
