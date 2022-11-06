@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from 'components/notFound/notFound';
@@ -9,6 +9,7 @@ import Form from 'components/form/form';
 import { FormContext, MainContext } from 'components/context/context';
 import { ICards, IFormCards } from 'components/interfaces/interfaces';
 import Modal from 'components/mainPage/modal/modal';
+import { initialState, reducer } from './components/reducer';
 
 function App() {
   // Main Context
@@ -24,6 +25,8 @@ function App() {
   const [pagesCount, setPagesCount] = useState(0);
   const [currentCharacter, setCurrentCharacter] = useState('');
   const [active, setActive] = useState(localStorage.getItem('activePage') || 'home');
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   // Form Context
 
@@ -43,7 +46,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('gender', gender);
     localStorage.setItem('status', status);
-    localStorage.setItem('page', JSON.stringify(page));
+    localStorage.setItem('page', JSON.stringify(state.page));
     localStorage.setItem('activePage', active);
     localStorage.setItem('formStorage', JSON.stringify(storage));
   });
@@ -69,6 +72,8 @@ function App() {
         setCurrentCharacter,
         active,
         setActive,
+        state,
+        dispatch,
       }}
     >
       <FormContext.Provider

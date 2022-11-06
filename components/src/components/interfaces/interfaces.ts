@@ -105,6 +105,8 @@ export type TMainContext = {
   setCurrentCharacter: React.Dispatch<React.SetStateAction<string>>;
   active: string;
   setActive: React.Dispatch<React.SetStateAction<string>>;
+  state: TReducer;
+  dispatch: React.Dispatch<TAction>;
 };
 
 export type TFormContext = {
@@ -126,4 +128,19 @@ export type TFormContext = {
   setAvatarError: React.Dispatch<React.SetStateAction<boolean>>;
   acceptError: boolean;
   setAcceptError: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type TReducer = {
+  page: number;
+};
+
+export enum TActionKind {
+  increment = 'increment',
+  decrement = 'decrement',
+  customPage = 'customPage',
+}
+
+export type TAction = {
+  type: TActionKind;
+  payload: number;
 };

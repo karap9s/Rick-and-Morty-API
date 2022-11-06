@@ -1,25 +1,17 @@
 import { MainContext } from 'components/context/context';
 import React, { useContext, useEffect, useState } from 'react';
+import { TActionKind } from '../../interfaces/interfaces';
 import styles from './pagination.module.css';
 
 const Pagination: React.FC = () => {
-  const { page, setPage, pagesCount } = useContext(MainContext);
+  const { pagesCount, state, dispatch } = useContext(MainContext);
   const [buttons, setButtons] = useState<(string | number)[]>([] as (string | number)[]);
 
   const pageHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setPage(Number((e.target as HTMLButtonElement).textContent));
-  };
-
-  const prevHandler = () => {
-    if (page !== 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const nextHandler = () => {
-    if (page !== pagesCount) {
-      setPage(page + 1);
-    }
+    dispatch({
+      type: TActionKind.customPage,
+      payload: Number((e.target as HTMLButtonElement).textContent),
+    });
   };
 
   useEffect(() => {
@@ -40,18 +32,26 @@ const Pagination: React.FC = () => {
         default:
           break;
       }
-      if (page <= 3) return [1, 2, 3, 4, '...', pagesCount];
-      if (page <= pagesCount - 3) return [1, '..', page - 1, page, page + 1, '....', pagesCount];
+      if (state.page <= 3) return [1, 2, 3, 4, '...', pagesCount];
+      if (state.page <= pagesCount - 3)
+        return [1, '..', state.page - 1, state.page, state.page + 1, '....', pagesCount];
       return [1, '...', pagesCount - 3, pagesCount - 2, pagesCount - 1, pagesCount];
     };
 
     setButtons(getPagination);
-  }, [pagesCount, page]);
+  }, [pagesCount, state.page]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.line}>
-        <button onClick={prevHandler} className={`${styles.page} ${styles.control}`}>
+        <button
+          onClick={() => {
+            if (state.page > 1) {
+              dispatch({ type: TActionKind.decrement, payload: 1 });
+            }
+          }}
+          className={`${styles.page} ${styles.control}`}
+        >
           Previous
         </button>
         {buttons.map((el: string | number) => (
@@ -59,12 +59,19 @@ const Pagination: React.FC = () => {
             disabled={el === '..' || el === '...' || el === '....'}
             key={el}
             onClick={pageHandler}
-            className={`${styles.page} ${page === el && styles.active}`}
+            className={`${styles.page} ${state.page === el && styles.active}`}
           >
             {el}
           </button>
         ))}
-        <button onClick={nextHandler} className={`${styles.page} ${styles.control}`}>
+        <button
+          onClick={() => {
+            if (state.page < pagesCount) {
+              dispatch({ type: TActionKind.increment, payload: 1 });
+            }
+          }}
+          className={`${styles.page} ${styles.control}`}
+        >
           Next
         </button>
       </div>
