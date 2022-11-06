@@ -89,8 +89,6 @@ export type TEpisodes = {
 };
 
 export type TMainContext = {
-  // page: number;
-  // setPage: React.Dispatch<React.SetStateAction<number>>;
   gender: string;
   setGender: React.Dispatch<React.SetStateAction<string>>;
   status: string;
@@ -101,8 +99,6 @@ export type TMainContext = {
   setType: React.Dispatch<React.SetStateAction<string>>;
   card: ICards;
   setCard: React.Dispatch<React.SetStateAction<ICards>>;
-  // pagesCount: number;
-  // setPagesCount: React.Dispatch<React.SetStateAction<number>>;
   currentCharacter: string;
   setCurrentCharacter: React.Dispatch<React.SetStateAction<string>>;
   active: string;

@@ -1,3 +1,17 @@
+.background_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../../../assets/img/rick-sanchez-easier-for-you-wallpaper.jpg);
+  background-size: contain;
+}
+
+.modal_wrapper {
+  width: 45%;
+  height: 40%;
+  margin-bottom: 100px;
+}
+
 .modal {
   width: 100%;
 }
@@ -6,6 +20,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgb(70, 253, 33);
 }
 
 .episodes_heading {
