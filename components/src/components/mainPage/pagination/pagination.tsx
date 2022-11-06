@@ -6,7 +6,6 @@ import { decrement, increment, pageHandler } from '../../redux/mainSlice';
 import { useAppSelector } from '../../../hooks';
 
 const Pagination: React.FC = () => {
-  // const { page, setPage, pagesCount } = useContext(MainContext);
   const page = useAppSelector((state: IReducer) => state.main.page);
   const pagesCount = useAppSelector((state: IReducer) => state.main.pagesCount);
   const dispatch = useDispatch();
