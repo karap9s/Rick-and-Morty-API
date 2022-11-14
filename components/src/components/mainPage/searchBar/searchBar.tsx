@@ -67,7 +67,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'female':
-        setGender(e.target.value.toLowerCase());
+        dispatch(setGender(e.target.value.toLowerCase()));
         setCheckedGender({
           any: false,
           male: false,
@@ -77,7 +77,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'genderless':
-        setGender(e.target.value.toLowerCase());
+        dispatch(setGender(e.target.value.toLowerCase()));
         setCheckedGender({
           any: false,
           male: false,
@@ -87,7 +87,7 @@ const Search: React.FC = () => {
         });
         break;
       case 'unknown_second':
-        setGender('unknown');
+        dispatch(setGender('unknown'));
         setCheckedGender({
           any: false,
           male: false,
