@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './pagination.module.css';
 import { useDispatch } from 'react-redux';
 import { IReducer } from '../../interfaces/interfaces';
-import { decrement, increment, pageHandler } from '../../redux/mainSlice';
+import { decrementPage, incrementPage, pageHandler } from '../../redux/mainSlice';
 import { useAppSelector } from '../../../hooks';
 
 const Pagination: React.FC = () => {
@@ -45,7 +45,7 @@ const Pagination: React.FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.line}>
         <button
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(decrementPage())}
           className={`${styles.page} ${styles.control}`}
         >
           Previous
@@ -61,7 +61,7 @@ const Pagination: React.FC = () => {
           </button>
         ))}
         <button
-          onClick={() => dispatch(increment())}
+          onClick={() => dispatch(incrementPage())}
           className={`${styles.page} ${styles.control}`}
         >
           Next

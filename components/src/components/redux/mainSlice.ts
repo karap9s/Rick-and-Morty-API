@@ -21,12 +21,12 @@ const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    increment(state) {
+    incrementPage(state) {
       if (state.page !== state.pagesCount) {
         state.page = state.page + 1;
       }
     },
-    decrement(state) {
+    decrementPage(state) {
       if (state.page !== 1) {
         state.page = state.page - 1;
       }
@@ -82,8 +82,8 @@ const mainSlice = createSlice({
 export default mainSlice.reducer;
 
 export const {
-  increment,
-  decrement,
+  incrementPage,
+  decrementPage,
   pageHandler,
   setCard,
   setCurrentCharacter,
