@@ -7,6 +7,7 @@ import { setGender, setName, setStatus, setType } from '../../redux/mainSlice';
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
+
   const dispatch = useAppDispatch();
 
   const [checkedStatus, setCheckedStatus] = useState<TCheckedStatus>(
