@@ -11,4 +11,5 @@ The application uses:
   <li>Redux Toolkit - The Redux Toolkit package is intended to be the standard way to write   Redux logic</li>
   <li>Typescript - it is a JavaScript-based static typing language</li>
 
+
 </ul>
